@@ -1,0 +1,810 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@300;400;500;600;700&family=Lora:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+:root{
+    --blue: #084071;
+    --white: #FFFFFF;
+    --yellow: #EED836;
+    --grey: #B7B7B7;
+
+    --headingFont: "Montserrat", sans-serif;
+    --subHeadingFont: "Lora", serif;
+    --paragraphFont: "Hind Madurai", sans-serif;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    scroll-behavior: smooth;
+}
+body{
+    overflow-x: hidden;
+    width: 100%;
+    font-size: 16px;
+}
+a{
+    text-decoration: none;
+}
+.wrapper{
+    height: 100vh; 
+    padding: 2% 5%;
+}
+.navBar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--headingFont);
+}
+.nav_logo{
+    display: flex;
+    flex-direction: row;
+}
+.nav_text{ 
+    display: flex;
+    flex-direction: column;
+    margin-top: 2vw;
+    font-size: 18px;
+    font-weight: 700;
+}
+#help_text{
+    color: var(--blue);
+}
+#desk_text{
+    color: var(--yellow);
+}
+#ministry_picture{
+    width: 7vw;
+}
+.nav_links{
+    display: flex;
+    gap:5rem;
+}
+.nav_links a{
+    color: var(--blue);
+    position: relative;
+    text-decoration: none;
+    gap: 5rem;
+    font-weight: 500;
+}
+.nav_links .active::after{
+    content: "";
+    position: absolute;
+    background-color: var(--yellow);
+    height: 3px;
+    width: 150%;
+    left: -30%;
+    bottom: -.5em;
+}
+.nav_links a::after{
+    content: "";
+    position: absolute;
+    background-color: var(--yellow);
+    height: 3px;
+    width: 0%;
+    left: -25%;
+    bottom: -.5em;
+    transition: 0.3s;
+}
+.nav_links a:hover::after{
+    width: 150%;
+}
+.login_button > button{
+    background-color: var(--yellow);
+    border: none;
+    border-radius: 8px;
+    padding: 1.5vh 4.5vw;
+    font-family: var(--headingFont);
+    color: var(--blue);
+    font-weight: 600;
+    font-size: 14px;
+}
+.login_button>button:hover {
+    background-color: var(--white);
+    border: 2px solid var(--yellow);
+}
+.heroContent {
+    display: flex;
+    flex-direction: row;  
+}
+.leftside_content {
+    max-width: 50%;
+    padding: 5vh 3%;
+    display: flex;
+    flex-direction: column;
+}
+.leftside_content h1 {
+    font-size: 2.3em;
+    font-family: var(--subHeadingFont);
+    color: var(--blue);
+}
+#yellow_line{
+    width: 45%;
+    margin-top: 0;
+}
+.leftside_content p {
+    margin: 4vh 0 15vh 0;
+    font-size: 0.8em;
+    color: var(--grey);
+    font-family: var(--paragraphFont);
+}
+.buttons {
+    display: flex;
+    gap: 1rem;
+}
+.btn-contactICT{
+    padding: 10px 30px;
+    background-color: var(--blue);
+    border: none;
+    font-size: 1em;
+    border-radius: 6px;
+    color: var(--white);
+    font-family: var(--paragraphFont);
+}
+.btn-quickSolution {
+    padding: 10px 30px;
+    background-color: var(--white);
+    border: 2px solid var(--yellow);
+    font-size: 1em;
+    border-radius: 6px;
+    font-family: var(--paragraphFont);
+    color: var(--blue);
+}
+.btn-contactICT:hover{
+    background-color: var(--yellow);
+    color: var(--blue);
+}
+.btn-quickSolution:hover{
+    background-color: var(--yellow);
+}
+.right-content{
+    width: 50%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.illustration-img{
+    width: 90%;
+}
+
+/****************************************CONTACT ICT STYLING****************************************************/
+
+#contact-ict{
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--blue);
+    padding: 1.5em 5vw 0 0;
+}
+.heading h2{
+    font-size: 2rem;
+    color: var(--white);
+    text-align: center;
+    font-family: var(--subHeadingFont);
+    margin-top: zz;
+}
+#parag{
+    color: var(--grey);
+    font-family: var(--paragraphFont);
+    text-align: center;
+    margin: .5em auto;
+    width: 35%;
+    font-size: .8em;
+}
+.yellow-line{
+    text-align: center;
+}
+#yline{
+    position: relative;
+    right: -10em;
+    top: -0.3em;
+    width: 9%;
+}
+.bluSectionWrapper{
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 30px;
+    padding: 10vh 0;
+}
+.left-img{
+    width: 50%;
+}
+.leftside-container{
+    position: relative;
+}
+#flot1{
+    position: absolute;
+    top: 1rem;
+    right: 8rem;
+    width: 70%;
+    transform: rotate(2deg);
+}
+#flot2{
+    position: absolute;
+    top: -4rem;
+    width: 80%;
+    left: 30%;
+}
+#flot3{
+    position: absolute;
+    width: 70%;
+    left: 30%;
+}
+.contactict-form{
+    width: 40%;
+    padding-top: 3%;
+}
+.contactict-form form {
+    display: flex;
+    flex-direction: column;
+}
+.nameSurname{
+    display: flex;
+    gap: 15px;
+    margin-bottom: 3%;
+}
+.container3{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+#sname, #office-number{
+    width: 50%;
+    background-color: transparent;
+    color: var(--white);
+    border: 1px solid var(--yellow);
+    font-family: var(--paragraphFont);
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 8px;
+    outline: none;
+}
+#department{
+    width: 40%;
+    background-color: transparent;
+    color: var(--white);
+    border: 1px solid var(--yellow);
+    font-family: var(--paragraphFont);
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 8px;
+    outline: none;
+    margin-bottom: 3%;
+}
+#problem-faced{
+    background-color: transparent;
+    border: 1px solid  var(--yellow);
+    color: var(--white);
+    font-family: var(--paragraphFont);
+    padding: 2%;
+    outline: none;
+    border-radius: 8px;
+    margin-bottom: 3%;
+    font-size: 16px;
+    width: 100%;
+}
+#submit-button{
+    padding: 1.5% 5%;
+    background-color: var(--white);
+    color: var(--blue);
+    border-radius: 8px;
+    border: none;
+    font-family: var(--paragraphFont);
+    font-size: .9em; 
+    cursor: pointer;
+}
+#submit-button:hover{
+    background-color: var(--blue);
+    border: 1px solid var(--yellow);
+    color: var(--white);
+}
+
+
+
+/**************************** FOOOTER STYLING ******************************/
+
+footer{
+    padding: 10%;
+    width: 100%;
+    height: 40vh;
+    background-color:var(--blue);
+    color: var(--grey);
+    font-size: 1.4em;
+    text-align: center;
+}
+footer .top-hr{
+    margin-bottom: 3em;
+    border: none;
+    border-top: 2px solid var(--white);
+}
+footer a{
+    color: var(--yellow);
+}
+/***********************************Login Page Styling***********************************************************/
+#logInSection{
+    box-sizing: border-box;
+    width: 100vw;
+    height: 100vh;
+}
+.signInForm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.signInText{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+}
+#signText{
+    font-size: 50px;
+    font-weight: 500;
+    font-family: var(--subHeadingFont);
+    color: var(--blue);
+}
+#inText{
+    font-size: 50px;
+    font-weight: 500;
+    font-family: var(--subHeadingFont);
+    color: var(--yellow);
+}
+#yellowLine{
+    margin-left: 7em;
+    margin-top: -0.5em;
+    width: 35%;
+}
+.signInText p{
+    font-family: var(--paragraphFont);
+    color: var(--grey);
+    font-size: 14px;
+    width: 75%;
+    margin: 1rem auto;
+}
+.hero_sign_in{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    width: 30%;
+}
+#username_login, #password_login{
+    padding: 0.8em 1em;
+    border: 2px solid var(--yellow);
+    border-radius: 8px;
+    font-family: var(--paragraphFont);
+    color: var(--blue);
+    outline: none;
+    width: 100%;
+}
+#login_signin_btn{
+    padding: 1em;
+    color: var(--white);
+    background-color: var(--blue);
+    font-family: var(--headingFont);
+    width: 50%;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+}
+#login_signin_btn:hover{
+    background-color: var(--white);
+    border: 2px solid var(--yellow);
+    color: var(--blue);
+}
+/***********************************************Dashboard styling*******************************************/
+
+/*****  ********************* styling column 1 - Dashboard ****** **********************/
+.containerDashboard {
+    font-family: var(--headingFont);
+    height: 100%;   
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.column1 {
+    padding: 3vh 5vw;
+    width: 15vw; 
+}
+.logo_container{
+    display: flex;
+    align-items: center;
+}
+#logo_dashboard{
+    width: 5rem;
+    height: auto;
+}
+.text_dashboard{
+    display: inline-block;
+    flex-direction: column;
+    font-size: 1rem; 
+    font-family: var(--headingFont);
+    font-weight: 600;
+}
+#help_dashboard{
+    color: var(--blue);
+}
+#desk_dashboard{
+    color: var(--yellow);
+}
+.icon_text_container {
+    display: flex;
+    flex-direction: column; 
+    flex-grow: 1; 
+    width: 100%; 
+    margin-top: 6rem;
+    font-family: var(--paragraphFont);
+}
+.icon-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.icon{
+    width: 34%;
+}
+.icon-text span{
+    font-size: 1rem;
+}
+#icon-text-dashboard {
+    color: var(--yellow);
+}
+#icon-text-tasks, #icon-text-projects{
+    color: var(--grey);
+}
+.logout-container{
+    display: flex;
+    flex-grow: 1; 
+    width: 34%;
+    margin-top: 10rem;
+}
+#logout-text{
+    display: flex;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: red;
+    font-weight: 500;
+}
+
+/*****  ********************* styling column 2 - Dashboard ****** **********************/
+.column2{
+    flex: 0 0 70%;
+    align-items: center;
+    background-color: var(--white);
+    padding: 2%;
+    box-sizing: border-box;
+}
+.main_content_container{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-grow: 1;
+}
+
+#hello{
+    color: var(--blue);
+    font-family: var(--headingFont);
+    font-weight: 500;
+    font-size: 3.5rem;
+}
+#name{
+    color: var(--yellow);
+    font-family: var(--headingFont);
+    font-weight: 500;
+    font-size: 3.5rem;
+}
+.main_text_hello h2{
+    color: var(--grey);
+    font-family: var(--paragraphFont);
+    font-size: 0.7rem;
+    font-weight: 120;
+    margin-top: -1%;
+}
+.date_time {
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
+    color: var(--grey);
+    font-family: var(--headingFont);
+    font-size: 0.7rem;
+    margin-top: 2%;
+}
+.date_icon {
+    width: 2rem; 
+}
+.summary-section {
+    display: flex;
+    justify-content: space-around; 
+    align-items: center;
+    margin-top: 20px;
+    padding: 30px 20px 30px 40px; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+}
+.summary-item {
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+.summary-item2{
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+.summary-text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    font-family: var(--headingFont);
+}
+.summary-label {
+    font-size: 1rem;
+    color: var(--grey);
+    font-weight: 500;
+    line-height: 0.4;
+}
+
+.summary-count {
+    font-size: 0.8rem;
+}
+.summary-item p{
+    margin: 0;
+}
+#number-finished{
+    font-size: 3.3rem;
+    font-weight: 400;
+    color: #80c1fa;
+}
+#number-pending{
+    font-size: 3.3rem;
+    font-weight: 400;
+    color: var(--yellow);
+}
+#tasks{
+    color: var(--grey);
+}
+.current-tasks-section {
+    margin-top: 2em;
+}
+
+.current-tasks-section h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-family: var(--subHeadingFont);
+    color: var(--grey);
+}
+.current-tasks-section p{
+    font-size: 0.8rem;
+    color: var(--grey);
+}
+.tasks-list {
+    margin-top: 1em;
+}
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5em 1em;
+    margin-bottom: 0.5em;
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+.task-name, .task-id, .task-department, .task-status {
+    font-size: 0.9em;
+    font-family: var(--paragraphFont);
+}
+
+.task-status {
+    font-weight: 500;
+}
+
+.task-status.pending {
+    color: #ffc107;
+}
+
+.task-status.completed {
+    color: #28a745;
+}
+.task-status.in-progress {
+    color: #dc3545;
+}
+
+/*****  ********************* styling column 3 - Dashboard****** **********************/
+
+.column3 {
+    flex: 0 0 15%;
+    align-items: center; 
+    box-sizing: border-box;
+    padding: 5% 1%;
+}
+.profile-card {
+    border-radius: 8px;
+    padding: 2%;
+    background-color: var(--grey);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center; 
+    align-items: flex-start;
+}
+.profile-info h3 {
+    font-size: 1rem;
+    font-family: var(--headingFont);
+    color: var(--blue);
+    margin-bottom: 2rem;
+}
+.profile-info .job-title {
+    font-size: 0.8rem;
+    font-family: var(--paragraphFont);
+    color: var(--blue);
+    margin-bottom: 2rem;
+}
+.profile-info .department {
+    font-size: 0.8rem;
+    font-family: var(--paragraphFont);
+    color: var(--blue);
+}
+
+/************************************************User Management Pge Styling*******************************/
+
+.column1 {
+    padding: 1%;
+    flex: 0 0 15%; 
+    border-right: 1px solid var(--grey);
+}
+.sidebar_menu {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5rem;
+}
+.menu_item {
+    display: block;
+    color: var(--grey);
+    text-decoration: none;
+}
+.menu_item.active, .menu_item:hover {
+    color: var(--yellow);
+}
+
+/* Main Content (Column 2) */
+.column2{
+    border-right: 1px solid var(--grey);
+}
+.header {
+    margin-bottom: 2em;
+    font-family: var(--headingFont);
+}
+.header #hello {
+    font-size: 3rem;
+    color: var(--grey);
+}
+.header #name{
+    font-size: 3rem;
+    color: var(--blue);
+}
+.header h2{
+    font-size: 0.8rem;
+    font-family: var(--paragraphFont);
+    color: var(--grey);
+}
+.summary_userManagement {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2em;
+    padding: 30px 20px 30px 40px; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+}
+.summary_Item {
+    color: var(--grey);
+}
+.summary_Number {
+    font-size: 3rem; 
+    font-family: var(--headingFont);  
+    color: var(--grey);
+    font-weight: 500;
+}
+.item_descr{
+    font-size: 1rem;
+    margin-left: 1em;
+}
+/* Tabs Section */
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2em;
+}
+.tab {
+    padding: 0.5em 1em;
+    color: var(--grey);
+    font-family: var(--headingFont);
+    text-decoration: none;
+    position: relative;
+}
+
+.tab .active::after{
+    content: "";
+    position: absolute;
+    background-color: var(--yellow);
+    height: 3px;
+    width: 100%;
+    left: -5%;
+    bottom: -.2em;
+}
+.tab::after{
+    content: "";
+    position: absolute;
+    background-color: var(--yellow);
+    height: 3px;
+    width: 0%;
+    left: -5%;
+    bottom: -.2em;
+    transition: 0.3s;
+}
+.tab:hover::after{
+    width: 100%;
+}
+
+/* Form Section */
+.new-user-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+.form-group {
+    display: flex;
+    gap: 4em;
+}
+.form-group input, .form-group select {
+    width: 50%;
+    padding: 0.7em;
+    border: 1px solid var(--grey);
+    border-radius: 5px;
+    font-family: var(--subHeadingFont);
+}
+.form_password{
+    width: 40%;
+}
+.submitButton {
+    padding: 0.8em;
+    width: 20%;
+    background-color: var(--blue);
+    color: var(--white);
+    font-family: var(--headingFont);
+    border: none;
+    border-radius: 5px;
+}
+.submitButton:hover {
+    background-color: var(--yellow);
+    color: var(--blue);
+}
+
+/************************************************* adminTasks_users Styling*******************************/
+/* User Cards Section */
+.user-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1em;
+}
+.user-card {
+    background-color: var(--white);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1.5em;
+    text-align: center;
+}
+.user-card p {
+    font-size: 1em;
+    color: var(--grey);
+    margin-bottom: 0.5em;
+}
+
+.view-link {
+    color: var(--blue);
+}
+
+.view-link:hover {
+    text-decoration: underline;
+}
+
