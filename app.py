@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash,redirect, url_for
 import forms as forms
 from dotenv import load_dotenv
 import os 
@@ -39,8 +39,15 @@ def login():
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
+        
+        return redirect( url_for('admin_dashboard', name=username))
+        
     return render_template('login.html', form = form) 
 
+
+@app.route('/dashboard/<name>')
+def admin_dashboard(name):
+    return render_template('dashboard.html')
 
 
 
