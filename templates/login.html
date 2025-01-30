@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
     <section id="logInSection">
         <div class="wrapper">
             <div class="navBar">
                 <div class="nav_logo">
-                   <img id="ministry_picture" src="./images - helpDesk/logo.png" alt="logo picture"> 
+                   <img id="ministry_picture" src="../static/images - helpDesk/logo.png" alt="logo picture"> 
                    <div class="nav_text">
                       <span id="help_text">Help</span>
                       <span id="desk_text">Desk</span>
@@ -22,9 +22,6 @@
                     <a href="">Services</a>
                     <a href="">Blog</a>
                     <a href="">About us</a>
-                </div>
-                <div class="login_button">
-                   <button>Login</button> 
                 </div>
             </div>
             <div class="signInForm">
@@ -41,9 +38,16 @@
                     </p>
                 </div>
                 <div class="hero_sign_in">
-                    <input type="text" id="username_login" name="username" placeholder="Username" autocomplete="off">
-                    <input type="password" id="password_login" name="password" placeholder="Password">
-                    <button id="login_signin_btn">Log in</button>
+                    <form action="/login" method="post">
+                      {{ form.hidden_tag()}}
+
+                        {{  form.username( class='loginputs')  }}
+                        {{  form.password(  class='loginputs') }}<!---
+                        <input type="text" class="loginputs" id="username_login" name="username" placeholder="Username" autocomplete="off">
+                        <input type="password" class = 'loginputs' id="password_login" name="password" placeholder="Password">
+                    --><button id="login_signin_btn">Log in</button>
+                    </form>
+                    
                 </div>
             </div>
         </div>    

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, flash
-from forms import GetProblem 
+import forms as forms
 from dotenv import load_dotenv
 import os 
 
@@ -16,7 +16,7 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
 @app.route('/', methods = ['POST', 'GET'])
 def home():
-    form = GetProblem()
+    form = forms.GetProblem()
         
     if form.validate_on_submit():
         name = form.username.data
@@ -29,6 +29,20 @@ def home():
         
         
     return render_template('index.html', form = form, )
+
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = forms.LogIn()
+    
+    if form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
+    return render_template('login.html', form = form) 
+
+
+
 
 
 
