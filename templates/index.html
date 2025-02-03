@@ -1,44 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Help Desk | HOME</title>
-    <link rel="stylesheet" href="../static/css/style.css">
-</head>
-<body>
+{%  extends 'base.html'   %}
+
+
+{%  block content  %}
+
     {% for message in get_flashed_messages() %}
         <div class="success">
             {{ message }}
+            <button class="msg-button">OK</button>
         </div>
     {% endfor  %}
     <section>
         <div class="wrapper">
-        <div class="navBar">
-            <div class="nav_logo">
-               <img id="ministry_picture" src="../static/images - helpDesk/logo.png" alt="logo picture"> 
-               <div class="nav_text">
-                  <span id="help_text">Help</span>
-                  <span id="desk_text">Desk</span>
-               </div>
-            </div>
-            <div class="nav_links">
-                <a href="">Home</a>
-                <a href="">Services</a>
-                <a href="">Blog</a>
-                <a href="">About us</a>
-            </div>
-            <div class="login_button">
-               <a href="{{ url_for('login') }}">Login</a> 
-            </div>
-        </div>
+            {% include "./layouts/navbar.html"  %}
         <div class="heroContent">
             <div class="leftside_content">
-                <h1>Lorem ipsum dolor sit amet,<br> Supporting adipiscing.</h1>
-                <svg id="yellow_line" xmlns="http://www.w3.org/2000/svg" width="315.68" height="25.096" viewBox="0 0 315.68 25.096">
-                    <path id="Path_2" data-name="Path 2" d="M280,463.088C276.46,452.083,483.069,441.556,462,442c-37.988.8-312,21.088-312,21.088" 
-                    transform="translate(-149.852 -439.987)" fill="none" stroke="#eed836" stroke-width="4"/>
-                  </svg>
+                <h1>Lorem ipsum dolor,<br>  adipiscing.
+                    <svg id="yellow_line" xmlns="http://www.w3.org/2000/svg" width="315.68" height="25.096" viewBox="0 0 315.68 25.096">
+                        <path id="Path_2" data-name="Path 2" d="M280,463.088C276.46,452.083,483.069,441.556,462,442c-37.988.8-312,21.088-312,21.088" 
+                        transform="translate(-149.852 -439.987)" fill="none" stroke="#eed836" stroke-width="4"/>
+                    </svg>
+                </h1>
                 <p>
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
                     Officia aliquid, excepturi id velit veniam odit ut beatae 
@@ -49,11 +30,11 @@
             
             <div class="buttons">
                 <button class="btn-contactICT">Contact ICT</button>
-                <button class="btn-quickSolution">Quick Solution</button>
+                <button class="btn-quickSolution"> <a href="{{ url_for('login') }}">Login</a></button>
             </div>
         </div>
             <div class="right-content">
-                <img src="../static/images - helpDesk/hero-img.png" alt="Person at Desk" class="illustration-img">
+                <img src="../static/images - helpDesk/hero1.svg" alt="Person at Desk" class="illustration-img">
              </div>
     </div>
     </section>
@@ -80,7 +61,7 @@
                 <svg id="flot2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1063.712 1057.488">
                     <path id="blob1" d="M506.549,69.732c60.541,57.509,127.511,92.015,175.193,152.138,48.218,60.646,76.614,146.387,32.146,187.689-43.932,41.3-161.263,38.165-236.27,75.285-74.47,37.12-107.688,115.019-149.477,127.043s-92.686-41.3-165.55-79.467C90.265,494.779-4.029,472.3-47.961,416.357c-43.4-56.464-36.432-145.865,5.358-210.693S75.263,101.624,144.376,46.729,275.1-78.223,333.5-73.518C391.9-68.29,446.009,12.223,506.549,69.732Z" transform="matrix(0.731, -0.682, 0.682, 0.731, 106.895, 555.935)" fill="rgba(235,235,235,0.12)"/>
                 </svg>
-                <img src="../static/images - helpDesk/undraw_next_tasks_re_5eyy.svg" alt="" id="flot3">
+                <img src="../static/images - helpDesk/problem_svg.svg" alt="" id="flot3">
                 </div>  
             </div> 
             
@@ -114,7 +95,4 @@
         <hr class="bottom-hr" >
     </footer>
 
-
-<script src="../static/js/main.js"></script>
-</body>
-</html>
+    {% endblock  %}

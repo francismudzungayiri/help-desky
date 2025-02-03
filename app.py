@@ -28,7 +28,7 @@ def home():
         flash('FORM SUBMITTED SUCCESSFULY')
         
         
-    return render_template('index.html', form = form, )
+    return render_template('index.html', form = form, title= 'Home' )
 
 
 
@@ -42,7 +42,7 @@ def login():
         
         return redirect( url_for('admin_dashboard', name=username))
         
-    return render_template('login.html', form = form) 
+    return render_template('login.html', form = form ) 
 
 
 @app.route('/dashboard/<name>')

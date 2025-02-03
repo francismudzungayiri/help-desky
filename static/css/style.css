@@ -8,6 +8,17 @@
     --headingFont: "Montserrat", sans-serif;
     --subHeadingFont: "Lora", serif;
     --paragraphFont: "Hind Madurai", sans-serif;
+
+
+
+    /******  LINKED PROJECT COLORS ********/
+    --background: #0A192F ;
+    --praragraph: #FFFFFF;
+    --secondary-text: #8892B0 ;
+    --heading: #64FFDA;
+    --containers: #172A45 ;
+    --success: #41B06E;
+
 }
 *{
     margin: 0;
@@ -21,13 +32,16 @@ body{
     overflow-x: hidden;
     width: 100%;
     font-size: 16px;
+    background-color: var(--background);
+    color: var(--praragraph);
+    font-family: var(--paragraphFont);
 }
 a{
     text-decoration: none;
 }
 .wrapper{
     height: 100vh; 
-    padding: 2% 5%;
+    padding: 4% 5%;
 }
 .navBar{
     display: flex;
@@ -39,19 +53,23 @@ a{
 .nav_logo{
     display: flex;
     flex-direction: row;
-}
+}/**
 .nav_text{ 
     display: flex;
     flex-direction: column;
     margin-top: 2vw;
     font-size: 18px;
     font-weight: 700;
+}**/
+.nav_text{
+    font-size: 1.5em;
+    font-weight: 700;
 }
 #help_text{
-    color: var(--blue);
+    color: var(--praragraph);
 }
 #desk_text{
-    color: var(--yellow);
+    color: var(--heading);
 }
 #ministry_picture{
     width: 7vw;
@@ -61,7 +79,7 @@ a{
     gap:5rem;
 }
 .nav_links a{
-    color: var(--blue);
+    color: var(--praragraph);
     position: relative;
     text-decoration: none;
     gap: 5rem;
@@ -70,7 +88,7 @@ a{
 .nav_links .active::after{
     content: "";
     position: absolute;
-    background-color: var(--yellow);
+    background-color: var(--heading);
     height: 3px;
     width: 150%;
     left: -30%;
@@ -79,7 +97,7 @@ a{
 .nav_links a::after{
     content: "";
     position: absolute;
-    background-color: var(--yellow);
+    background-color: var(--heading);
     height: 3px;
     width: 0%;
     left: -25%;
@@ -89,21 +107,14 @@ a{
 .nav_links a:hover::after{
     width: 150%;
 }
-.login_button > a{
-    background-color: var(--yellow);
-    border: none;
+button > a{
     width: 100%;
-    text-decoration: none;
-    border-radius: 8px;
-    padding: 1.5vh 4.5vw;
-    font-family: var(--headingFont);
-    color: var(--blue);
-    font-weight: 600;
-    font-size: 14px;
+    color: var(--heading);
+    padding: .8em 3em;
 }
 .login_button>a:hover {
     background-color: var(--white);
-    border: 2px solid var(--yellow);
+    border: 2px solid var(--background);
 }
 .heroContent {
     display: flex;
@@ -111,53 +122,57 @@ a{
 }
 .leftside_content {
     max-width: 50%;
-    padding: 5vh 3%;
+    padding: 0 3%;
     display: flex;
+    justify-content: center;
+    align-items: flex-start;
     flex-direction: column;
 }
 .leftside_content h1 {
-    font-size: 2.3em;
+    font-size: 3.5em;
     font-family: var(--subHeadingFont);
-    color: var(--blue);
+    color: var(--praragraph);
 }
-#yellow_line{
-    width: 45%;
-    margin-top: 0;
+h1 svg{
+    display: block;
+    width: 60%;
 }
 .leftside_content p {
-    margin: 4vh 0 15vh 0;
-    font-size: 0.8em;
+    font-size: 1.1em;
     color: var(--grey);
     font-family: var(--paragraphFont);
+    margin: 4% 0 10% 0;
 }
 .buttons {
     display: flex;
     gap: 1rem;
 }
-.btn-contactICT{
-    padding: 10px 30px;
-    background-color: var(--blue);
+button{
     border: none;
-    font-size: 1em;
-    border-radius: 6px;
-    color: var(--white);
+    border-radius:6px;
     font-family: var(--paragraphFont);
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+}
+.btn-contactICT{
+    padding: .8em 3em;
+    background-color: var(--heading)
 }
 .btn-quickSolution {
-    padding: 10px 30px;
-    background-color: var(--white);
-    border: 2px solid var(--yellow);
-    font-size: 1em;
-    border-radius: 6px;
-    font-family: var(--paragraphFont);
-    color: var(--blue);
+    background-color: transparent;
+    color: var(--heading);
+    border: 1px solid var(--heading);
 }
 .btn-contactICT:hover{
-    background-color: var(--yellow);
-    color: var(--blue);
+    background-color: transparent;
+    color: var(--heading);
+    border: 1px solid var(--heading);
+
 }
 .btn-quickSolution:hover{
-    background-color: var(--yellow);
+    border: 1px solid var(--praragraph);
+    color: var(--praragraph);
 }
 .right-content{
     width: 50%;
@@ -175,23 +190,22 @@ a{
 #contact-ict{
     height: 100vh;
     width: 100vw;
-    background-color: var(--blue);
     padding: 1.5em 5vw 0 0;
 }
 .heading h2{
-    font-size: 2rem;
-    color: var(--white);
+    font-size: 2.3rem;
+    color: var(--heading);
     text-align: center;
     font-family: var(--subHeadingFont);
     margin-top: zz;
 }
 #parag{
-    color: var(--grey);
+    color: var(--praragraph);
     font-family: var(--paragraphFont);
     text-align: center;
-    margin: .5em auto;
-    width: 35%;
-    font-size: .8em;
+    margin: 0 auto;
+    width: 30%;
+    font-size: 1em;
 }
 .yellow-line{
     text-align: center;
@@ -251,66 +265,75 @@ a{
     align-items: flex-start;
     flex-direction: column;
 }
+input{
+    background-color: transparent;
+    font-family: var(--paragraphFont);
+    outline: none;
+    color: var(--praragraph);
+    border-radius: 8px;
+    font-size: 1em;
+    padding: .9em;
+    border: 1px solid var(--heading);
+}
 .sname, .office-number{
     width: 50%;
-    background-color: transparent;
-    color: var(--white);
-    border: 1px solid var(--yellow);
-    font-family: var(--paragraphFont);
-    padding: 8px;
-    font-size: 16px;
-    border-radius: 8px;
-    outline: none;
 }
 .department{
     width: 70%;
-    background-color: transparent;
-    color: var(--white);
-    border: 1px solid var(--yellow);
-    font-family: var(--paragraphFont);
-    padding: 8px;
-    font-size: 16px;
-    border-radius: 8px;
-    outline: none;
-    margin-bottom: 3%;
+    margin-bottom: 2em;
 }
 .problem-faced{
     background-color: transparent;
-    border: 1px solid  var(--yellow);
+    border: 1px solid  var(--heading);
     color: var(--white);
     font-family: var(--paragraphFont);
-    padding: 2%;
+    padding: 1em;
     outline: none;
     border-radius: 8px;
-    margin-bottom: 3%;
-    font-size: 16px;
+    margin-bottom: 3em;
+    font-size: 1em;
     width: 100%;
 }
 #submit-button{
-    padding: 1.5% 5%;
-    background-color: var(--white);
-    color: var(--blue);
+    padding: 1em 3em;
+    background-color: var(--containers);
+    color: var(--heading);
     border-radius: 8px;
-    border: none;
+    border: 1px solid var(--heading);
     font-family: var(--paragraphFont);
-    font-size: .9em; 
+    font-size: 1em; 
     cursor: pointer;
 }
 #submit-button:hover{
-    background-color: var(--blue);
-    border: 1px solid var(--yellow);
+    background-color: transparent;
+    border: 1px solid var(--praragraph);
     color: var(--white);
 }
 
 .success{
     display: block;
     position: absolute;
-    background-color: rgb(18, 139, 18);
+    background-color: var(--containers);
+    padding: 2em;
     width: 60%;
-    left: 30%;
-    top: 5%;
-    color: #FFFFFF;
+    left: 50%;
+    top: 13%;
+    transform: translate(-50%, -50%);
+    color: var(--heading);
     font-size: 1.1em;
+    text-align: center;
+    border-radius: 10px;
+    z-index: 1;
+}
+.msg-button{
+    padding: .5em 1.5em;
+    background-color: transparent;
+    display: block;
+    margin-top: 2em;
+    color: var(--heading);
+    border-radius: 5px;
+    border: 1px solid var(--heading);
+    float: right;
 }
 
 /**************************** FOOOTER STYLING ******************************/
@@ -319,18 +342,17 @@ footer{
     padding: 10%;
     width: 100%;
     height: 40vh;
-    background-color:var(--blue);
-    color: var(--grey);
+    color: var(--secondary-text);
     font-size: 1.4em;
     text-align: center;
 }
 footer .top-hr{
     margin-bottom: 3em;
     border: none;
-    border-top: 2px solid var(--white);
+    border-top: 2px solid var(--praragraph);
 }
 footer a{
-    color: var(--yellow);
+    color: var(--heading);
 }
 /***********************************Login Page Styling***********************************************************/
 #logInSection{
@@ -339,6 +361,7 @@ footer a{
     height: 100vh;
 }
 .signInForm{
+    margin-top: 5vh;
     display: flex;
     justify-content: center;
     align-items: center;

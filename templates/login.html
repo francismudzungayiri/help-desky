@@ -1,29 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="../static/css/style.css">
-</head>
-<body>
+{% extends 'base.html'%}
+{% block content %}
     <section id="logInSection">
         <div class="wrapper">
-            <div class="navBar">
-                <div class="nav_logo">
-                   <img id="ministry_picture" src="../static/images - helpDesk/logo.png" alt="logo picture"> 
-                   <div class="nav_text">
-                      <span id="help_text">Help</span>
-                      <span id="desk_text">Desk</span>
-                   </div>
-                </div>
-                <div class="nav_links">
-                    <a href="">Home</a>
-                    <a href="">Services</a>
-                    <a href="">Blog</a>
-                    <a href="">About us</a>
-                </div>
-            </div>
+            
+            {% include "./layouts/navbar.html" %}
             <div class="signInForm">
                 <div class="signInText">
                     <h1>
@@ -39,10 +19,10 @@
                 </div>
                 <div class="hero_sign_in">
                     <form action="/login" method="post">
-                      {{ form.hidden_tag()}}
+                      {{ form.hidden_tag() }}
 
-                        {{  form.username( class='loginputs')  }}
-                        {{  form.password(  class='loginputs') }}<!---
+                        {{  form.username(class='loginputs')  }}
+                        {{  form.password(class='loginputs') }}<!---
                         <input type="text" class="loginputs" id="username_login" name="username" placeholder="Username" autocomplete="off">
                         <input type="password" class = 'loginputs' id="password_login" name="password" placeholder="Password">
                     --><button id="login_signin_btn">Log in</button>
@@ -52,5 +32,4 @@
             </div>
         </div>    
     </section>
-</body>
-</html>
+{% endblock %}
