@@ -1,35 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="../static/css/style.css">
-</head>
-<body>
-    <div class="containerDashboard">
+{%  extends 'base.html' %}
+
+{%  block content %}
+    <div class="container">
         <!----------------- COLUMN 1--------------------------->
-        <div class="column1">
-            <div class="logo_container">
+        <div class="column1"><!----
             <img id="logo_dashboard" src="../static/images  - helpDesk/logo.png" alt="logo">
             <div class="text_dashboard">
                 <p id="help_dashboard">Help</p>
                 <p id="desk_dashboard">Desk</p>
-            </div>
+            </div>-->
+
+            <div class="nav_text">
+                <span id="help_text">Help</span>
+                <span id="desk_text">Deskie</span>
             </div>
             <div class="icon_text_container">
-                <div class="icon_text">
+                <div>
                     <img src="../static/images - helpDesk/home_37dp_084071_FILL0_wght400_GRAD0_opsz40.svg" alt="Icon 1" class="icon">
                     <span id="icon-text-dashboard">Dashboard</span>
+                </div>
+                <div>
                     <img src="../static/images - helpDesk/drag_indicator_36dp_B7B7B7_FILL0_wght400_GRAD0_opsz40 copy.svg" alt="Icon 2" class="icon">
                     <span id="icon-text-tasks">Tasks</span>
+                </div>
+                <div>
                     <img src="../static/images - helpDesk/hive_34dp_CCCCCC_FILL0_wght400_GRAD0_opsz40.svg" alt="Icon 3" class="icon">
                     <span id="icon-text-projects">Projects</span>
                 </div>
             </div>    
                 <div class="logout-container">
-                    <img src="../static/images - helpDesk/logout_36dp_084071_FILL0_wght400_GRAD0_opsz40.svg" alt="Logout Icon" class="logout-icon">
-                    <span id="logout-text">Logout</span>
+                    <div>
+                        <img src="../static/images - helpDesk/logout_36dp_084071_FILL0_wght400_GRAD0_opsz40.svg" alt="Logout Icon" class="logout-icon">
+                        <span id="logout-text">Logout</span>
+                    </div>
                 </div>
         
         </div>
@@ -52,7 +55,7 @@
                         <div class="summary-text-container">
                             <p class="summary-label">Finished</p>
                             <div class="summary-count">
-                                <span id="number-finished">10</span> <span id="tasks">tasks</span>
+                                <span class="summary-number">10</span> <span id="tasks">tasks</span>
                             </div>
                          </div>
                     </div>
@@ -61,7 +64,7 @@
                             <div class="summary-text-container">
                                 <p class="summary-label">Pending</p>
                                 <div class="summary-count">
-                                    <span id="number-pending">5</span> <span id="tasks">tasks</span> 
+                                    <span class="summary-number">5</span> <span id="tasks">tasks</span> 
                                 </div>
                             </div>
                     </div>
@@ -104,17 +107,5 @@
                 </div>
             </div>
         </div>
-        <!----------------- COLUMN 3--------------------------->
-            <div class="column3">
-                <div class="profile-card">
-                    <div class="profile-info">
-                        <h3>FRANCIS MUDZUNGAYIRI</h3>
-                        <p class="job-title">ICT Officer</p>
-                        <p class="department">Systems Section</p>
-                    </div>
-                </div>
-            </div>
     </div>
-
-</body>
-</html>
+{% endblock %}

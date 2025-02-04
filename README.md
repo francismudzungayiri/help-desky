@@ -18,3 +18,8 @@ DAY 01
     form validation
     flash messages
     user input their problem 
+
+
+Day 02 
+    login functionality
+    code refactor  
