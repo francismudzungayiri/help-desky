@@ -38,6 +38,39 @@ body{
 }
 a{
     text-decoration: none;
+    font-weight: 500;
+    color: var(--praragraph);
+}
+input{
+    background-color: transparent;
+    font-family: var(--paragraphFont);
+    outline: none;
+    color: var(--praragraph);
+    border-radius: 8px;
+    font-size: 1em;
+    padding: .9em;
+    border: 1px solid var(--heading);
+}
+textarea{
+    background-color: transparent;
+    border: 1px solid  var(--heading);
+    color: var(--white);
+    padding: 1em;
+    outline: none;
+    border-radius: 8px;
+    margin-bottom: 3em;
+    font-size: 1em;    
+    font-family: var(--paragraphFont);
+}
+button{
+    border: none;
+    font-family: var(--paragraphFont);
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 1em 3em;
+    color: var(--praragraph);
+    border-radius: 8px;
 }
 .wrapper{
     height: 100vh; 
@@ -85,11 +118,8 @@ a{
     gap:5rem;
 }
 .nav_links a{
-    color: var(--praragraph);
     position: relative;
-    text-decoration: none;
     gap: 5rem;
-    font-weight: 500;
 }
 .nav_links .active::after{
     content: "";
@@ -153,14 +183,6 @@ h1 svg{
     display: flex;
     gap: 1rem;
 }
-button{
-    border: none;
-    border-radius:6px;
-    font-family: var(--paragraphFont);
-    font-size: 1em;
-    font-weight: 500;
-    cursor: pointer;
-}
 .btn-contactICT{
     padding: .8em 3em;
     background-color: var(--heading)
@@ -188,7 +210,7 @@ button{
     align-items: center;
 }
 .illustration-img{
-    width: 90%;
+    width: 70%;
 }
 
 /****************************************CONTACT ICT STYLING****************************************************/
@@ -271,16 +293,6 @@ button{
     align-items: flex-start;
     flex-direction: column;
 }
-input{
-    background-color: transparent;
-    font-family: var(--paragraphFont);
-    outline: none;
-    color: var(--praragraph);
-    border-radius: 8px;
-    font-size: 1em;
-    padding: .9em;
-    border: 1px solid var(--heading);
-}
 .sname, .office-number{
     width: 50%;
 }
@@ -289,26 +301,10 @@ input{
     margin-bottom: 2em;
 }
 .problem-faced{
-    background-color: transparent;
-    border: 1px solid  var(--heading);
-    color: var(--white);
-    font-family: var(--paragraphFont);
-    padding: 1em;
-    outline: none;
-    border-radius: 8px;
-    margin-bottom: 3em;
-    font-size: 1em;
     width: 100%;
 }
 #submit-button{
-    padding: 1em 3em;
-    background-color: var(--containers);
-    color: var(--heading);
-    border-radius: 8px;
-    border: 1px solid var(--heading);
-    font-family: var(--paragraphFont);
-    font-size: 1em; 
-    cursor: pointer;
+    width: 50%;
 }
 #submit-button:hover{
     background-color: transparent;
@@ -362,9 +358,11 @@ footer a{
 }
 /***********************************Login Page Styling***********************************************************/
 #logInSection{
-    box-sizing: border-box;
     width: 100vw;
     height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .signInForm{
     margin-top: 5vh;
@@ -372,6 +370,8 @@ footer a{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-color: var(--containers);
+    border-radius: 10px;
 }
 .signInText{
     display: flex;
@@ -383,13 +383,13 @@ footer a{
     font-size: 50px;
     font-weight: 500;
     font-family: var(--subHeadingFont);
-    color: var(--blue);
+    color: var(--praragraph);
 }
 #inText{
     font-size: 50px;
     font-weight: 500;
     font-family: var(--subHeadingFont);
-    color: var(--yellow);
+    color: var(--heading);
 }
 #yellowLine{
     margin-left: 7em;
@@ -412,29 +412,26 @@ footer a{
     width: 30%;
 }
 .loginputs{
-    padding: 0.8em 1em;
-    border: 2px solid var(--yellow);
-    border-radius: 8px;
-    font-family: var(--paragraphFont);
-    color: var(--blue);
-    outline: none;
     width: 100%;
-    margin-bottom: 1.5em;
+    margin-bottom: 2em;
 }
 #login_signin_btn{
-    padding: 1em;
-    color: var(--white);
-    background-color: var(--blue);
-    font-family: var(--headingFont);
-    width: 50%;
-    font-weight: 600;
-    border-radius: 8px;
-    border: none;
+    background-color: transparent;
+    border: 1px solid var(--praragraph) ;
 }
 #login_signin_btn:hover{
-    background-color: var(--white);
-    border: 2px solid var(--yellow);
-    color: var(--blue);
+    background-color: var(--containers);
+    border: none;
+    color: var(--heading);
+}
+
+#go-back{
+    margin-top: 3em;
+    letter-spacing: 1.3px;
+    cursor: pointer;
+}
+#go-back:hover{
+    color: var(--heading);
 }
 /***********************************************Dashboard styling*******************************************/
 
@@ -456,7 +453,6 @@ footer a{
     flex-direction: column;
     justify-content: space-between;
     border-radius: 1em;
-    border: none;
 }
 .logo_container{
     display: flex;
@@ -627,164 +623,3 @@ footer a{
 
 
 /************************************************User Management Pge Styling*******************************/
-
-.column1 {
-    padding: 1%;
-    flex: 0 0 15%; 
-    border-right: 1px solid var(--grey);
-}
-.sidebar_menu {
-    display: flex;
-    flex-direction: column;
-    margin-top: 5rem;
-}
-.menu_item {
-    display: block;
-    color: var(--grey);
-    text-decoration: none;
-}
-.menu_item.active, .menu_item:hover {
-    color: var(--yellow);
-}
-
-/* Main Content (Column 2) */
-.column2{
-    border-right: 1px solid var(--grey);
-}
-.header {
-    margin-bottom: 2em;
-    font-family: var(--headingFont);
-}
-.header #hello {
-    font-size: 3rem;
-    color: var(--grey);
-}
-.header #name{
-    font-size: 3rem;
-    color: var(--blue);
-}
-.header h2{
-    font-size: 0.8rem;
-    font-family: var(--paragraphFont);
-    color: var(--grey);
-}
-.summary_userManagement {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 2em;
-    padding: 30px 20px 30px 40px; 
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
-}
-.summary_Item {
-    color: var(--grey);
-}
-.summary_Number {
-    font-size: 3rem; 
-    font-family: var(--headingFont);  
-    color: var(--grey);
-    font-weight: 500;
-}
-.item_descr{
-    font-size: 1rem;
-    margin-left: 1em;
-}
-/* Tabs Section */
-.tabs {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 2em;
-}
-.tab {
-    padding: 0.5em 1em;
-    color: var(--grey);
-    font-family: var(--headingFont);
-    text-decoration: none;
-    position: relative;
-}
-
-.tab .active::after{
-    content: "";
-    position: absolute;
-    background-color: var(--yellow);
-    height: 3px;
-    width: 100%;
-    left: -5%;
-    bottom: -.2em;
-}
-.tab::after{
-    content: "";
-    position: absolute;
-    background-color: var(--yellow);
-    height: 3px;
-    width: 0%;
-    left: -5%;
-    bottom: -.2em;
-    transition: 0.3s;
-}
-.tab:hover::after{
-    width: 100%;
-}
-
-/* Form Section */
-.new-user-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-}
-.form-group {
-    display: flex;
-    gap: 4em;
-}
-.form-group input, .form-group select {
-    width: 50%;
-    padding: 0.7em;
-    border: 1px solid var(--grey);
-    border-radius: 5px;
-    font-family: var(--subHeadingFont);
-}
-.form_password{
-    width: 40%;
-}
-.submitButton {
-    padding: 0.8em;
-    width: 20%;
-    background-color: var(--blue);
-    color: var(--white);
-    font-family: var(--headingFont);
-    border: none;
-    border-radius: 5px;
-}
-.submitButton:hover {
-    background-color: var(--yellow);
-    color: var(--blue);
-}
-
-/************************************************* adminTasks_users Styling*******************************/
-/* User Cards Section */
-.user-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 1em;
-}
-.user-card {
-    background-color: var(--white);
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 1.5em;
-    text-align: center;
-}
-.user-card p {
-    font-size: 1em;
-    color: var(--grey);
-    margin-bottom: 0.5em;
-}
-
-.view-link {
-    color: var(--blue);
-}
-
-.view-link:hover {
-    text-decoration: underline;
-}
-

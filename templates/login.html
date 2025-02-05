@@ -2,8 +2,6 @@
 {% block content %}
     <section id="logInSection">
         <div class="wrapper">
-            
-            {% include "./layouts/navbar.html" %}
             <div class="signInForm">
                 <div class="signInText">
                     <h1>
@@ -29,6 +27,7 @@
                     </form>
                     
                 </div>
+                <a id="go-back" href="  {{ url_for('home')  }} ">Go back</a>
             </div>
         </div>    
     </section>
