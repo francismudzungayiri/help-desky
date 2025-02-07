@@ -185,7 +185,8 @@ h1 svg{
 }
 .btn-contactICT{
     padding: .8em 3em;
-    background-color: var(--heading)
+    background-color: var(--heading);
+    color : var(--background)
 }
 .btn-quickSolution {
     background-color: transparent;
@@ -305,6 +306,7 @@ h1 svg{
 }
 #submit-button{
     width: 50%;
+    color: var(--background);
 }
 #submit-button:hover{
     background-color: transparent;
@@ -357,7 +359,7 @@ footer a{
     color: var(--heading);
 }
 /***********************************Login Page Styling***********************************************************/
-#logInSection{
+#logInSection .wrapper{
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -365,13 +367,17 @@ footer a{
     align-items: center;
 }
 .signInForm{
-    margin-top: 5vh;
+    padding: 3vh 5vw;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    width: 60%;
     background-color: var(--containers);
     border-radius: 10px;
+}
+.signInForm form{
+    width: 40vw;
 }
 .signInText{
     display: flex;
@@ -414,15 +420,16 @@ footer a{
 .loginputs{
     width: 100%;
     margin-bottom: 2em;
+    color: var(--secondary-text);
 }
 #login_signin_btn{
     background-color: transparent;
     border: 1px solid var(--praragraph) ;
 }
 #login_signin_btn:hover{
-    background-color: var(--containers);
-    border: none;
-    color: var(--heading);
+    background-color: var(--background);
+    color: var(--praragraph);
+    border:  1px solid var(--heading);
 }
 
 #go-back{

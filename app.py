@@ -16,7 +16,8 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 #set up the mongodb conection
 client = MongoClient('localhost', 27017) 
 db = client['Help-Desky'] 
-collection = db['querries']
+querries_collection = db['querries'] # querries collection
+users_collection = db['users']
 
 
 
@@ -41,7 +42,7 @@ def home():
             'status': 'pending'
         }
         
-        collection.insert_one(data)
+        querries_collection.insert_one(data)
 
         print(name, office, department, problem, ticket_number)
         
@@ -60,7 +61,10 @@ def login():
         username = form.username.data
         password = form.password.data
         
-        return redirect( url_for('admin_dashboard', name=username))
+        #check if email and password match
+        user = users_collection.find_one({'email': username, 'password': password})
+        if user:
+            return redirect( url_for('admin_dashboard', name=username))
         
     return render_template('login.html', form = form ) 
 
