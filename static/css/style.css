@@ -484,7 +484,7 @@ footer a{
     height: 100%;
     cursor: pointer;
 }
-.vertical-active{
+.vertical-tab-active{
     background-color: var(--background);
     border-radius: 5px;
     color: var(--heading);
@@ -494,7 +494,7 @@ footer a{
     display: flex;
     align-items: center;
     font-family: var(--subHeadingFont);
-    color: red;
+    color: var(--pending);
     font-weight: 500;
 }
 
@@ -516,25 +516,25 @@ footer a{
     color: var(--praragraph);
     font-family: var(--subHeadingFont);
     font-weight: 500;
-    font-size: 3.5rem;
+    font-size: 3rem;
 }
 #name{
     color: var(--heading);
     font-family: var(--subHeadingFont);
     font-weight: 800;
-    font-size: 3.5rem;
+    font-size: 3rem;
 }
 .main_text_hello h2{
     color: var(--grey);
     font-family: var(--paragraphFont);
-    font-size: 0.8em;
+    font-size: 1em;
     font-weight: 400
 }
 .date_time {
     display: flex;
     justify-content: flex-end; 
     align-items: center;
-    color: var(--grey);
+    color: var(--praragraph);
     font-family: var(--headingFont);
     font-size: 0.9rem;
     margin-top: 2%;
@@ -542,48 +542,37 @@ footer a{
 .date_icon {
     width: 2rem; 
 }
-.summary-section {
+.summary_container{
+    margin: 2em 0;
     display: flex;
-    justify-content: space-around; 
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
     align-items: center;
-    margin-top: 20px;
-    padding: 30px 20px 30px 40px; 
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+    color: var(--secondary-text);
+    font-size: 1em;
+
 }
-.summary-item {
-    display: flex;
-    align-items: center;
-    text-align: left;
-}
-.summary-item2{
-    display: flex;
-    align-items: center;
-    text-align: left;
-}
-.summary-text-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
+.summary_container div h6{
     font-family: var(--headingFont);
-}
-.summary-label {
-    font-size: 1rem;
-    color: var(--grey);
-    font-weight: 500;
-    line-height: 0.4;
+    font-weight: 400;
+    font-size: 1em;
 }
 
-.summary-count {
-    font-size: 0.8rem;
+.summary_container div .tasks_num{
+    font-size: 1.7em;
+    font-weight: 700;
 }
-.summary-item p{
-    margin: 0;
+.summary_container div .pending{
+    color: var(--pending);
 }
-.summary-number{
-    font-size: 3.3rem;
-    font-weight: 400;
-    color: var(--praragraph)
+.summary_container div .inprogress{
+    color: var(--allocated);
 }
+.summary_container div .completed{
+    color: var(--heading);
+}
+
 #tasks{
     color: var(--grey);
 }
@@ -633,5 +622,11 @@ table tr:hover{
     background-color: var(--background);
     cursor: pointer;
     color: var(--heading);
+}
+.tab-pane{
+    display: none;
+}
+.tab-pane.pane-active{
+    display: block;
 }
 /************************************************User Management Pge Styling*******************************/
