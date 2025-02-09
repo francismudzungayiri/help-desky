@@ -14,23 +14,26 @@
                 <span id="help_text">Help</span>
                 <span id="desk_text">Deskie</span>
             </div>
-            <div class="icon_text_container">
-                <div>
-                    <img src="../static/images - helpDesk/home-white.svg" alt="Icon 1" class="icon">
+            <div class="vertical-nav">
+                <div class="vertical-active vertical-tab">
+                  <!---  <img src="../static/images - helpDesk/home-white.svg" alt="Icon 1" class="icon">   -->
                     <span id="icon-text-dashboard">Dashboard</span>
                 </div>
-                <div>
-                    <img src="../static/images - helpDesk/file-text.svg" alt="Icon 2" class="icon">
+                <div class="vertical-tab">
+                    <span>Users</span>
+                </div>
+                <div class="vertical-tab">
+                    <!-- <img src="../static/images - helpDesk/file-text.svg" alt="Icon 2" class="icon"> --->
                     <span id="icon-text-tasks">Tasks</span>
                 </div>
-                <div>
-                    <img src="../static/images - helpDesk/settings.svg" alt="Icon 3" class="icon">
+                <div class="vertical-tab">
+                  <!--  <img src="../static/images - helpDesk/settings.svg" alt="Icon 3" class="icon"> -->
                     <span id="icon-text-projects">Projects</span>
                 </div>
             </div>    
                 <div class="logout-container">
                     <div>
-                        <img src="../static/images - helpDesk/log-out-white.svg" alt="Logout Icon" class="logout-icon">
+                    <!--    <img src="../static/images - helpDesk/log-out-white.svg" alt="Logout Icon" class="logout-icon"> -->
                         <span id="logout-text">Logout</span>
                     </div>
                 </div>
@@ -40,7 +43,7 @@
         <div class="column2">
             <div class="main_content_container">
                 <div class="main_text_hello">
-                    <span id="hello">Hello,</span> <span id="name">Francis</span>
+                    <span id="hello">Hello,</span> <span id="name">{{ firstname }}</span>
                     <h2>Lorem Ipsum adalah contoh teks atau dummy dalam industri percetaka</h2>
                 </div>
                 <div class="date_time">
@@ -71,40 +74,40 @@
                 </div>
             </div>
             <div class="current-tasks-section">
-                <h2>Current Tasks</h2>
+                <h2>Unallocated Tasks</h2>
                 <p>Lorem Ipsum adalah contoh teks atau.</p>
-                <div class="tasks-list">
-                    <div class="task-item">
-                        <span class="task-name">Francis Mudzungayiri</span>
-                        <span class="task-id">E425</span>
-                        <span class="task-department">Department</span>
-                        <span class="task-status pending">Pending</span>
-                    </div>
-                    <div class="task-item">
-                        <span class="task-name">Varlery Gonamombe</span>
-                        <span class="task-id">G771</span>
-                        <span class="task-department">Department</span>
-                        <span class="task-status completed">Completed</span>
-                    </div>
-                    <div class="task-item">
-                        <span class="task-name">Tanaka Mushava</span>
-                        <span class="task-id">E745</span>
-                        <span class="task-department">Department</span>
-                        <span class="task-status in-progress">In Progress</span>
-                    </div>
-                    <div class="task-item">
-                        <span class="task-name">Gilbert Nyika</span>
-                        <span class="task-id">E425</span>
-                        <span class="task-department">Department</span>
-                        <span class="task-status in-progress">In Progress</span>
-                    </div>
-                    <div class="task-item">
-                        <span class="task-name">L. Jabu Bona</span>
-                        <span class="task-id">B631</span>
-                        <span class="task-department">Department</span>
-                        <span class="task-status completed">Completed</span>
-                    </div>
-                </div>
+                <div class="tasks-list tabs">
+                    <table id="Unallocated-tasks">
+                        <tr>
+                            <th>Name</th>
+                            <th>Office Number</th>
+                            <th>Status</th>
+                        </tr>
+                        {% for row in all_querries %}
+                        <tr>
+                            <td>{{ row['name']  }}</td>
+                            <td>{{ row['office_number']  }}</td>
+                            {%  if row['status'] == 'pending':   %}
+                                <td id="pending">{{  row['status']  }}</td>
+                            {% else:   %}
+                                <td id="allocated" > {{ row['status']  }}</td>
+
+                            {% endif  %}
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>           
+            
+             <!--- USER TAB    -->
+            
+                <div id="users" class="tabs"></div>
+
+             <!--- all tasks TAB    -->
+                <div id="taks" class="tabs"></div>
+
+              <!--- PROJECTS  TAB    -->
+                <div id="projects" class="tabs"></div>
+
             </div>
         </div>
     </div>

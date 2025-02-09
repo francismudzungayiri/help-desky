@@ -18,6 +18,9 @@
     --heading: #64FFDA;
     --containers: #172A45 ;
     --success: #41B06E;
+    --pending:#D70654;
+    --allocated: #F9CB43;
+    --completed: #497D74;
 
 }
 *{
@@ -454,6 +457,7 @@ footer a{
 }
 .column1 {
     padding: 2%;
+    height: 100%;
     width: 18vw; 
     background-color: var(--containers);
     display: flex;
@@ -465,25 +469,26 @@ footer a{
     display: flex;
     align-items: center;
 }
-.icon_text_container {
+.vertical-nav {
     display: flex;
     flex-direction: column; 
-    flex-grow: 1; 
     font-family: var(--paragraphFont);
+    gap: 2em;
 }
-.icon-text{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.vertical-nav div{
+    width: 100%;
+    padding: 10px 8px;
 }
-.icon{
-    width: 20%;
+.vertical-nav div span{
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
 }
-.icon-text span{
-    font-size: 1rem;
-}
-.logout-container{
+.vertical-active{
+    background-color: var(--background);
+    border-radius: 5px;
+    color: var(--heading);
+    font-weight: 700;
 }
 #logout-text{
     display: flex;
@@ -590,43 +595,43 @@ footer a{
     font-size: 1.5rem;
     font-weight: 600;
     font-family: var(--subHeadingFont);
-    color: var(--grey);
+    color: var(--praragraph);
 }
 .current-tasks-section p{
     font-size: 0.8rem;
-    color: var(--grey);
+    color: var(--secondary-text);
 }
-.tasks-list {
+#pending{
+    color: var(--pending)
+}
+#allocated{
+    color: var(--allocated);
+}
+#completed{
+    color: var(--heading);
+}
+table{
+    width: 100%;
+    max-height: 50vh;
+    border: none;
     margin-top: 1em;
 }
-.task-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5em 1em;
-    margin-bottom: 0.5em;
-    background-color: var(--white);
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
-.task-name, .task-id, .task-department, .task-status {
-    font-size: 0.9em;
-    font-family: var(--paragraphFont);
-}
+table tr{
+    padding: 0.8em;
+    border: none;
 
-.task-status {
-    font-weight: 500;
 }
-
-.task-status.pending {
-    color: #ffc107;
+table tr th{
+    text-align: left;
+    background-color: var(--background);
+    padding: 0.9em;
 }
-
-.task-status.completed {
-    color: #28a745;
+table td{
+    padding: .8em 1em;
 }
-.task-status.in-progress {
-    color: #dc3545;
+table tr:hover{
+    background-color: var(--background);
+    cursor: pointer;
+    color: var(--heading);
 }
-
-
 /************************************************User Management Pge Styling*******************************/

@@ -64,14 +64,18 @@ def login():
         #check if email and password match
         user = users_collection.find_one({'email': username, 'password': password})
         if user:
-            return redirect( url_for('admin_dashboard', name=username))
+            details = user
+            return redirect( url_for('admin_dashboard', username=details['first_name'], ))
         
     return render_template('login.html', form = form ) 
 
 
-@app.route('/dashboard/<name>')
-def admin_dashboard(name):
-    return render_template('dashboard.html')
+@app.route('/dashboard/<username>')
+def admin_dashboard(username):
+    condition =  {'status': 'pending'}
+    res = querries_collection.find(condition)
+    
+    return render_template('dashboard.html', firstname = username, all_querries = res)
 
 
 
