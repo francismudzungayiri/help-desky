@@ -6,7 +6,23 @@
 // Object.keys(tab_btns).forEach(key => {
 //     let btn = tab_btns[key]
 //     console.log(btn.innerHTML)
-// });
+// })
+
+
+
+/******  TABLE - ROW CLICKING   *******/
+
+document.addEventListener('DOMContentLoaded', () => {
+    const rows = document.querySelectorAll('tbody tr');
+    rows.forEach(row => {
+        row.addEventListener('click', () => {
+            const id = row.getAttribute('data-id');
+            window.location.href = `/details/${id}`;
+        });
+    });
+});
+
+
 
 let tab_btns = document.querySelectorAll('.tab-btn');
 let tab_pane = document.querySelectorAll('.tab-pane');

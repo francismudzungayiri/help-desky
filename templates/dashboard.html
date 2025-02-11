@@ -18,19 +18,25 @@
                 <div class="vertical-tab-active tab-btn" data-tab="dashboard">
                     <span>Dashboard</span>
                 </div>
+                {% if session.system_role == 'Administrator':%}
                 <div class="tab-btn" data-tab="users">
                     <span>Users</span>
                 </div>
+                {%  endif  %}
                 <div class="tab-btn" data-tab="projects">
                     <span>Projects</span>
                 </div>
                 <div class="tab-btn" data-tab="allTasks">
-                    <span>Tasks</span>
+                    {% if session.system_role == 'Administrator' : %}
+                        <span>Tasks</span>
+                    {% else: %}
+                        <span>My Tasks</span>
+                    {% endif  %}
                 </div>
             </div>    
                 <div class="logout-container">
                     <div>
-                        <a id="logout-text" href="  {{  url_for('home')  }}">Logout</a>
+                        <a id="logout-text" href="  {{  url_for('logout')  }}">Logout</a>
                     </div>
                 </div>
         
@@ -39,7 +45,7 @@
         <div class="column2">
             <div class="main_content_container">
                 <div class="main_text_hello">
-                    <span id="hello">Hello,</span> <span id="name">{{ firstname }}</span>
+                    <span id="hello">Hello,</span> <span id="name">{{ session.name }}</span>
                     <h2>Lorem Ipsum adalah contoh teks atau dummy dalam industri percetaka</h2>
                 </div>
                 <div class="date_time">
@@ -73,17 +79,19 @@
                             <th>Name</th>
                             <th>Office Number</th>
                             <th>Status</th>
+                            <th>Details</th>
                         </tr>
                         {% for row in all_querries %}
                         <tr>
-                            <td>{{ row['name']  }}</td>
+                             <td> {{ row['name']  }}</td>
                             <td>{{ row['office_number']  }}</td>
                             {%  if row['status'] == 'pending':   %}
                                 <td id="pending">{{  row['status']  }}</td>
                             {% else:   %}
                                 <td id="allocated" > {{ row['status']  }}</td>
-
+                            
                             {% endif  %}
+                            <td><a href="{{ url_for('row_details',username=session.name, ticket_number=row['ticket'] ) }}">view</a></td>
                         </tr>
                         {% endfor %}
                     </table>
@@ -93,13 +101,27 @@
              <!--- USER TAB    -->
             
             <div id="users" class="tab-pane">
-                <div class="users-tabs">
-                    <span>New User</span>
+                <div class="horizontal-tabs">
+                    <span class="active">New User</span>
                     <span>All Users</span>
                 </div>
                 <div class="user-content">
-                    <form action="/dashboard/" method="post">
-
+                    <h3>New User Registration</h3>
+                    <form action="/addnewuser" method="post">
+                        {{ form.hidden_tag() }}
+                        <div class="width-50">
+                            {{  form.firstname(class='loginputs', placeholder='First Name')  }}
+                            {{  form.surname(class='loginputs', placeholder='Last Name')   }}
+                        </div>
+                        <div class="width-50">
+                            {{  form.useremail(class='loginputs', placeholder='Email Address')  }}
+                            {{  form.system_role(class='loginputs')   }}
+                        </div>
+                        <div class="width-50">
+                            {{  form.position( class='loginputs', placeholder='Work Position')   }}
+                            {{  form.password(class='loginputs', placeholder = 'Password') }}
+                        </div>                    
+                       <button id="login_signin_btn">Register</button>
                     </form>
                 </div>
             </div>

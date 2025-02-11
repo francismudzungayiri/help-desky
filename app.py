@@ -1,9 +1,14 @@
-from flask import Flask, render_template, request, flash,redirect, url_for
+from flask import Flask, render_template, request, flash,redirect, url_for, session
 import forms as forms
 from dotenv import load_dotenv
 import os 
 from standalone import ticketing
 from pymongo import MongoClient
+from flask_session import Session
+from flask_bcrypt import Bcrypt
+
+
+
 
 
 load_dotenv()
@@ -11,6 +16,12 @@ load_dotenv()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+app.config['SESSION_PERMANENT'] = False
+app.config['SESSION_TYPE'] = 'filesystem'
+
+Session(app)
+bcrypt = Bcrypt(app)
+
 
 
 #set up the mongodb conection
@@ -44,9 +55,8 @@ def home():
         
         querries_collection.insert_one(data)
 
-        print(name, office, department, problem, ticket_number)
         
-        flash(f'Thank you, Please Wait for IT to assign a person to help you. ')
+        flash('Thank you, Please Wait for IT to assign a person to help you. ')
         
         
     return render_template('index.html', form = form, title= 'Home' )
@@ -62,23 +72,96 @@ def login():
         password = form.password.data
         
         #check if email and password match
-        user = users_collection.find_one({'email': username, 'password': password})
+        user = users_collection.find_one({'email': username})
         if user:
             details = user
-            return redirect( url_for('admin_dashboard', username=details['first_name'], ))
+            passcode = details['password']
+            verify_password = bcrypt.check_password_hash(passcode, password)
+            
+            if verify_password:
+                
+                session['name'] = details['first_name']
+                session['system_role'] = details['system_role']
+                username = session.get('name')
+                return redirect( url_for('dashboard', username = username))
+        
+        else:
+            flash('User not found.')
+                
         
     return render_template('login.html', form = form ) 
 
 
+
 @app.route('/dashboard/<username>')
-def admin_dashboard(username):
+def dashboard(username):
     condition =  {'status': 'pending'}
     res = querries_collection.find(condition)
+    form = forms.NewUser()  
     
-    return render_template('dashboard.html', firstname = username, all_querries = res)
+    username = session.get('name')
+    return render_template(
+        'dashboard.html',
+        username = username,
+        all_querries = res,
+        form = form
+    )
+    
+    
+@app.route('/addnewuser', methods=['POST'])
+def addNewUser():
+    
+    form = forms.NewUser()
+ 
+    if form.validate_on_submit():
+        firstname = form.firstname.data 
+        surname = form.surname.data
+        email = form.useremail.data
+        system_role =  form.system_role.data
+        position =  form.position.data
+        password =  form.password.data
+        
+        hashed_password = bcrypt.generate_password_hash(password)
+
+        new_user = {
+            'first_name':firstname,
+            'last_name':surname,
+            'email':email,
+            'system_role':system_role,
+            'position':position,
+            'password':hashed_password
+        }
+        
+        users_collection.insert_one(new_user)
+        user = session.get('name')
+        
+    return redirect(url_for('dashboard',username = user))
 
 
 
+@app.route('/dashboard/<username>/<ticket_number>')
+def row_details(username, ticket_number): 
+    
+    condition =  {'status': 'pending'}
+    res = querries_collection.find(condition)
+       
+    username = session.get('name')
+    
+    query = next((query for query in res if query['ticket'] == ticket_number))
+    
+    if query:    
+        return render_template('table_row.html', username = username, query = query )
+
+
+
+
+
+@app.route('/logout')
+def logout():
+    session['name'] = None
+    session['system_role'] = None
+    
+    return redirect('/')
 
 
 if __name__ == 'main':

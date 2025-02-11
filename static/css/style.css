@@ -75,6 +75,13 @@ button{
     color: var(--praragraph);
     border-radius: 8px;
 }
+select{
+    width: 30vw;
+    color: var(--secondary-text);
+    background: transparent;
+    border: 1px solid var(--heading);
+    padding: .9em;
+}
 .wrapper{
     height: 100vh; 
     width: 100vw;
@@ -630,3 +637,39 @@ table tr:hover{
     display: block;
 }
 /************************************************User Management Pge Styling*******************************/
+
+#users{
+    margin: 1em;
+}
+h3{
+    color: var(--secondary-text);
+    margin: 1em 0;
+}
+.horizontal-tabs{
+    margin-top: 1em;
+    display: flex;
+    gap: 1.5em
+}
+.horizontal-tabs span{
+    padding: .8em 1.5em;
+    font-size: 1em;
+    color: var(--secondary-text);
+    cursor: pointer;
+}
+.horizontal-tabs span:hover{
+    color: var(--praragraph);
+}
+.horizontal-tabs span.active{
+    font-weight: 700;
+    color: var(--praragraph);
+}
+.user-content{
+    padding: 0 5%;
+}
+.width-50{
+    display: flex;
+    gap: 5%;
+}
+.width-50 input{
+    width: 45%;
+}
