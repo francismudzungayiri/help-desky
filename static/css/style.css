@@ -673,3 +673,43 @@ h3{
 .width-50 input{
     width: 45%;
 }
+
+/********** VIEW TABLE ROW DETAILS **********/
+.details {
+    width: 60%;
+    background-color: var(--containers);
+    padding: 5%;
+}
+.details div p span{
+    font-size: 1.2em;
+    font-family: var(--subHeadingFont);
+    font-weight: 500;
+}
+.details  h1{
+    margin-bottom: 2em;
+}
+.details div p{
+    width: 45%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2em;
+}
+.details div {
+    display: flex;
+    justify-content: space-between;
+}
+.details div p .bold{
+    font-weight: 700;
+}
+.details div p .thin{
+    font-weight: 300;
+    color: var(--heading);
+    text-align: right;
+}
+.details div form{
+    margin-top: 2em;
+}
+#disabled{
+    cursor: not-allowed;
+    border: 1px solid var(--pending);
+}

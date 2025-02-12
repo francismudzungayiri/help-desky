@@ -141,6 +141,8 @@ def addNewUser():
 
 @app.route('/dashboard/<username>/<ticket_number>')
 def row_details(username, ticket_number): 
+
+    form = forms.Assign_Query()
     
     condition =  {'status': 'pending'}
     res = querries_collection.find(condition)
@@ -150,9 +152,19 @@ def row_details(username, ticket_number):
     query = next((query for query in res if query['ticket'] == ticket_number))
     
     if query:    
-        return render_template('table_row.html', username = username, query = query )
+        return render_template('table_row.html', username = username, query = query, form=form )
 
 
+@app.route('/assign-pending-query')
+def assign_query():
+    form  = forms.Assign_Query()
+    
+    if form.validate_on_submit():
+        assigned_to = form.assign_to.data 
+        
+        
+    
+    
 
 
 

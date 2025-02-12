@@ -23,3 +23,8 @@ DAY 01
 Day 02 
     login functionality
     code refactor  
+
+Day 03
+Day 04
+
+Day 05

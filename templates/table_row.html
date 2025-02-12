@@ -2,8 +2,55 @@
 {% block content %}
     <section id="logInSection">
         <div class="wrapper">
+            <div class="details">
+                <h1>
+                    <span id="signText">Ticket </span>
+                    <span id="inText">Details</span>
+                </h1>
+                <div>
+                    <p>
+                        <span>Name: </span>
+                        <span class="thin">{{ query['name'] }}</span>
+                    </p>
+                    <p>
+                        <span>Office number: </span>
+                        <span class="thin">{{  query['office_number']  }}</span>
+                    </p>
+                    
+                </div>
+                <div>
+                    <p>
+                        <span>Department: </span>
+                        <span class="thin">{{ query['department'] }}</span>
+                    </p>
+                    <p>
+                        <span>Challenge: </span>
+                        <span class="thin">{{  query['problem_faced']  }}</span>
+                    </p>
+                    
+                </div>
+                <div>
+                    <p>
+                        <span>Status: </span>
+                        <span class="thin">{{ query['status'] }}</span>
+                    </p>
+                    <p>
+                        <span>Ticket Number: </span>
+                        <span class="thin">{{  query['ticket']  }}</span>
+                    </p>
+                    
+                </div>
+                <div>
+                    <form action="/assign-pending-query">
+                        <label for="assign">Assign to: </label>
+                        {{   form.assign_to(class='loginputs')    }}
 
-            <h1>ROW DETAILS</h1>
+                        {{  form.ticket(id = 'disabled',class='loginputs', value= query['ticket'])}}
+                        <button id="login_signin_btn">ASSIGN</button>
+                    </form>                
+                </div>
+                <a id="go-back" href="  {{ url_for('dashboard', username=session.name)  }} ">Go back</a>
+            </div>
             
         </div>    
     </section>

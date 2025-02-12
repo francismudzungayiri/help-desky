@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from pymongo import MongoClient
 from wtforms import StringField, TextAreaField, PasswordField, SelectField, EmailField
 from wtforms.validators import InputRequired
 
@@ -29,3 +30,15 @@ class NewUser(FlaskForm):
     position = StringField('Work Position', validators=[InputRequired()])
     password = PasswordField('Password', validators=[InputRequired()])
     
+    
+
+class Assign_Query(FlaskForm):
+    client = MongoClient('localhost', 27017) 
+    db = client['Help-Desky'] 
+    users_collection = db['users']
+    
+    
+    ASSIGN_TO= users_collection.distinct('first_name', {'system_role':'General User'})
+
+    ticket = StringField(validators=[InputRequired()])
+    assign_to = SelectField('AAssign Person', choices=[name.title() for name in ASSIGN_TO], validators=[InputRequired()])
