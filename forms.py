@@ -40,5 +40,5 @@ class Assign_Query(FlaskForm):
     
     ASSIGN_TO= users_collection.distinct('first_name', {'system_role':'General User'})
 
-    ticket = StringField(validators=[InputRequired()])
     assign_to = SelectField('AAssign Person', choices=[name.title() for name in ASSIGN_TO], validators=[InputRequired()])
+    id = StringField()

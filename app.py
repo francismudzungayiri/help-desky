@@ -1,3 +1,4 @@
+from bson import ObjectId
 from flask import Flask, render_template, request, flash,redirect, url_for, session
 import forms as forms
 from dotenv import load_dotenv
@@ -139,8 +140,8 @@ def addNewUser():
 
 
 
-@app.route('/dashboard/<username>/<ticket_number>')
-def row_details(username, ticket_number): 
+@app.route('/dashboard/<username>/<id>')
+def row_details(username, id): 
 
     form = forms.Assign_Query()
     
@@ -149,19 +150,39 @@ def row_details(username, ticket_number):
        
     username = session.get('name')
     
-    query = next((query for query in res if query['ticket'] == ticket_number))
+    query = next((query for query in res if query['_id'] == ObjectId(id)))
     
     if query:    
         return render_template('table_row.html', username = username, query = query, form=form )
 
 
-@app.route('/assign-pending-query')
+@app.route('/assign-pending-query', methods=['POST'])
 def assign_query():
     form  = forms.Assign_Query()
     
     if form.validate_on_submit():
-        assigned_to = form.assign_to.data 
         
+        assigned_to = form.assign_to.data 
+        id = form.id.data
+        
+        doc_id = ObjectId(id)
+        new_data = {
+            'assigned_to': assigned_to,
+            'status': 'In Progreess'
+        }
+        
+        querries_collection.update_one(
+            {'_id': doc_id},
+            {'$set':new_data }
+        )
+        
+        print('DATA UPDATED SUCCESFULLY')
+        
+        user = session.get('name')
+        return redirect(url_for('dashboard', username=user))
+    else:
+        print(form.errors)
+        return 'NOTHING DONE'
         
     
     

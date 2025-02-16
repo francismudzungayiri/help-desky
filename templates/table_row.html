@@ -41,15 +41,15 @@
                     
                 </div>
                 <div>
-                    <form action="/assign-pending-query">
+                    <form action="{{ url_for('assign_query') }}", method="POST">
+                        {{ form.hidden_tag() }}
                         <label for="assign">Assign to: </label>
                         {{   form.assign_to(class='loginputs')    }}
-
-                        {{  form.ticket(id = 'disabled',class='loginputs', value= query['ticket'])}}
+                        {{   form.id( id='disabled', class='loginputs', value=query['_id'])     }}
                         <button id="login_signin_btn">ASSIGN</button>
                     </form>                
                 </div>
-                <a id="go-back" href="  {{ url_for('dashboard', username=session.name)  }} ">Go back</a>
+                <a id="go-back" class="goBack" href="  {{ url_for('dashboard', username=session.name)  }} ">Go back</a>
             </div>
             
         </div>    

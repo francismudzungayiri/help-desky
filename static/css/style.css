@@ -712,4 +712,8 @@ h3{
 #disabled{
     cursor: not-allowed;
     border: 1px solid var(--pending);
+    display: none;
+}
+.goBack{
+    margin-top: 2em;
 }
