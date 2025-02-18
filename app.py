@@ -96,15 +96,27 @@ def login():
 
 @app.route('/dashboard/<username>')
 def dashboard(username):
-    condition =  {'status': 'pending'}
-    res = querries_collection.find(condition)
-    form = forms.NewUser()  
-    
     username = session.get('name')
+    role = session.get('system_role')
+    res_progress_list = []
+    res_progress = 'NOTHING TO SHOW'
+    
+    pending_queries =  {'status': 'pending'}
+    if role == 'General User':
+        in_progress = {'$and': [{'status': 'In Progress'},{'assigned_to':username}]}    
+        res_progress = querries_collection.find(in_progress)
+    
+    res_pending = querries_collection.find(pending_queries)
+   
+    
+    form = forms.NewUser()  
+    res_progress_list = list(res_progress)
+    
     return render_template(
         'dashboard.html',
         username = username,
-        all_querries = res,
+        all_pending_queries = res_pending,
+        all_inprogress_queries = res_progress_list,
         form = form
     )
     
@@ -145,12 +157,21 @@ def row_details(username, id):
 
     form = forms.Assign_Query()
     
-    condition =  {'status': 'pending'}
-    res = querries_collection.find(condition)
-       
+    pending_condition =  {'status': 'pending'}
+    progress_condition = {'$and':[{'status':'In Progress'},{'assigned_to': username}]}
+    role = session.get('system_role')
     username = session.get('name')
-    
-    query = next((query for query in res if query['_id'] == ObjectId(id)))
+
+
+    res =None
+    query = None
+    if role== 'Administrator':    
+        res = querries_collection.find(pending_condition)
+        query = next((query for query in res if query['_id'] == ObjectId(id)), None)
+    else:
+        res = querries_collection.find(progress_condition)
+        query = next((query for query in res if query['_id'] == ObjectId(id) ), None)
+
     
     if query:    
         return render_template('table_row.html', username = username, query = query, form=form )
@@ -168,7 +189,7 @@ def assign_query():
         doc_id = ObjectId(id)
         new_data = {
             'assigned_to': assigned_to,
-            'status': 'In Progreess'
+            'status': 'In Progress'
         }
         
         querries_collection.update_one(

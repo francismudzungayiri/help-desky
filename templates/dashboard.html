@@ -81,31 +81,29 @@
                             <th>Status</th>
                             <th>Details</th>
                         </tr>
-                        {% for row in all_querries %}
+                        {% for row in all_pending_queries %}
                             {% if session.system_role == 'Administrator' : %}
                         <tr>
                              <td> {{ row['name']  }}</td>
                             <td>{{ row['office_number']  }}</td>
                             {%  if row['status'] == 'pending':   %}
-                                <td id="pending">{{  row['status']  }}</td>
-                            {% else:   %}
-                                <td id="allocated" > {{ row['status']  }}</td>
-                            
+                                <td id="pending">{{  row['status']  }}</td>                            
                             {% endif  %}
                             <td><a href="{{ url_for('row_details',username=session.name, id=row['_id'] ) }}">view</a></td>
                         </tr>
-                            {%   else :   %}
-                            {%   if  session.name == row['assigned_to']:   %}
+                            {% endif  %}
+                        {% endfor   %}
+                        {% if session.system_role == 'General User' : %}
+                        {%   for row in all_inprogress_queries %}
                             <tr>
                                 <td> {{ row['name']  }}</td>
                                <td>{{ row['office_number']  }}</td>
                                 <td id="allocated" > {{ row['status']  }}</td>
                                <td><a href="{{ url_for('row_details',username=session.name, id=row['_id'] ) }}">view</a></td>
                            </tr>
-                                {%  endif  %}
-                            {% endif  %}
-
+                           
                         {% endfor %}
+                        {% endif  %}
                     </table>
                 </div>           
             </div>

@@ -716,4 +716,7 @@ h3{
 }
 .goBack{
     margin-top: 2em;
+    width: 100%;
+    text-align: center;
+    color: var(--pending);
 }

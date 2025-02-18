@@ -40,6 +40,7 @@
                     </p>
                     
                 </div>
+                {% if session.system_role == 'Administrator' : %}
                 <div>
                     <form action="{{ url_for('assign_query') }}", method="POST">
                         {{ form.hidden_tag() }}
@@ -49,6 +50,7 @@
                         <button id="login_signin_btn">ASSIGN</button>
                     </form>                
                 </div>
+                {%  endif  %}
                 <a id="go-back" class="goBack" href="  {{ url_for('dashboard', username=session.name)  }} ">Go back</a>
             </div>
             
