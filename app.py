@@ -7,7 +7,7 @@ from standalone import ticketing
 from pymongo import MongoClient
 from flask_session import Session
 from flask_bcrypt import Bcrypt
-
+from datetime import date
 
 
 
@@ -32,6 +32,13 @@ querries_collection = db['querries'] # querries collection
 users_collection = db['users']
 
 
+def current_date():
+    today = date.today()
+    current = today.strftime("%d %b %Y")
+    
+    
+    return current
+    
 
 @app.route('/', methods = ['POST', 'GET'])
 def home():
@@ -51,7 +58,7 @@ def home():
             'department': department,
             'problem_faced': problem,
             'ticket': ticket_number,
-            'status': 'pending'
+            'status': 'Pending'
         }
         
         querries_collection.insert_one(data)
@@ -101,10 +108,30 @@ def dashboard(username):
     res_progress_list = []
     res_progress = 'NOTHING TO SHOW'
     
-    pending_queries =  {'status': 'pending'}
+    global count_pending
+    global count_inProgress
+    global count_completed
+    
+    pending_queries =  {'status': 'Pending'}
     if role == 'General User':
         in_progress = {'$and': [{'status': 'In Progress'},{'assigned_to':username}]}    
         res_progress = querries_collection.find(in_progress)
+        
+        count_inProgress = querries_collection.count_documents(in_progress)
+        
+        pending = {'$and': [{'status':'Pending'},{'assigned_to':username}]}
+        count_pending = querries_collection.count_documents(pending)
+        
+        completed = {'$and':[{'status':'Completed'}, {'assigned_to': username}]}
+        count_completed = querries_collection.count_documents(completed)
+    
+    else:
+        
+        count_inProgress = querries_collection.count_documents({'status':'In Progress'})
+        count_pending = querries_collection.count_documents({'status':'Pending'})
+        count_completed = querries_collection.count_documents({'status':'Completed'})
+        
+            
     
     res_pending = querries_collection.find(pending_queries)
    
@@ -112,12 +139,19 @@ def dashboard(username):
     form = forms.NewUser()  
     res_progress_list = list(res_progress)
     
+    current_Date = current_date()
+    
+         
     return render_template(
         'dashboard.html',
         username = username,
         all_pending_queries = res_pending,
         all_inprogress_queries = res_progress_list,
-        form = form
+        form = form,
+        current_Date = current_Date, 
+        pending = count_pending,
+        progress = count_inProgress,
+        completed = count_completed
     )
     
     
@@ -156,8 +190,9 @@ def addNewUser():
 def row_details(username, id): 
 
     form = forms.Assign_Query()
+    completeTask = forms.Commplete_Task()
     
-    pending_condition =  {'status': 'pending'}
+    pending_condition =  {'status': 'Pending'}
     progress_condition = {'$and':[{'status':'In Progress'},{'assigned_to': username}]}
     role = session.get('system_role')
     username = session.get('name')
@@ -174,7 +209,7 @@ def row_details(username, id):
 
     
     if query:    
-        return render_template('table_row.html', username = username, query = query, form=form )
+        return render_template('table_row.html', username = username, query = query, form=form, complete_task = completeTask )
 
 
 @app.route('/assign-pending-query', methods=['POST'])
@@ -205,7 +240,33 @@ def assign_query():
         print(form.errors)
         return 'NOTHING DONE'
         
+        
+@app.route('/completed-query', methods = ['POST'])
+def complete_task():
+    user = session.get('name')
+    form = forms.Commplete_Task()
     
+    if form.validate_on_submit():
+        comment = form.comment.data
+        ticket_id = form.id.data
+        
+        doc_id = ObjectId(ticket_id)
+        
+        new_data = {
+            'status': 'Completed',
+            'comment' : comment,
+        }
+        
+        querries_collection.update_one(
+            {'_id': doc_id},
+            {'$set': new_data}
+        )
+        print('DATA UPDATED SUCCESFULY')
+        return redirect(url_for('dashboard', username=user))
+    else:
+        print(form.errors)
+        return 'ERROR ---- NOTHING UPDATED'
+        
     
 
 

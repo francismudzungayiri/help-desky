@@ -40,5 +40,15 @@ class Assign_Query(FlaskForm):
     
     ASSIGN_TO= users_collection.distinct('first_name', {'system_role':'General User'})
 
-    assign_to = SelectField('AAssign Person', choices=[name.title() for name in ASSIGN_TO], validators=[InputRequired()])
+    assign_to = SelectField('Assign Person', choices=[name.title() for name in ASSIGN_TO], validators=[InputRequired()])
     id = StringField()
+    
+    
+    
+class Commplete_Task(FlaskForm):
+    
+    comment = TextAreaField('Your Comment', validators=[InputRequired()])
+    id = StringField()
+    
+    
+    

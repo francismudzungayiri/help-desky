@@ -51,6 +51,19 @@
                     </form>                
                 </div>
                 {%  endif  %}
+                {% if session.system_role == 'General User'%}
+                <div>
+                    <form action="{{ url_for('complete_task') }}", method="POST">
+                        {{ complete_task.hidden_tag() }}
+                        <label for="assign">If task completed click below: </label>
+                        {{   complete_task.comment(class='problem-faced' )    }}
+                        {{   complete_task.id( id='disabled', class='loginputs', value=query['_id'])     }}
+                        <button id="login_signin_btn">Task Completed</button>
+                    </form>                
+                </div>
+
+                {% endif %}
+
                 <a id="go-back" class="goBack" href="  {{ url_for('dashboard', username=session.name)  }} ">Go back</a>
             </div>
             

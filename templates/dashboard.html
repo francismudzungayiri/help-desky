@@ -49,24 +49,23 @@
                     <h2>Lorem Ipsum adalah contoh teks atau dummy dalam industri percetaka</h2>
                 </div>
                 <div class="date_time">
-                    <span class="date_text">26 July 2024</span>
-                    <span ><img src="../static/images - helpDesk/today_29dp_084071_FILL0_wght400_GRAD0_opsz24.svg" alt="date icon" class="date-icon"></span> 
+                    <span class="date_text">{{ current_Date }}</span>
                 </div>
             </div>
             <div class="summary_container">
                 <div>
                     <h6>Pending</h6>
-                    <span class="tasks_num pending">10</span>
+                    <span class="tasks_num pending">{{ pending }}</span>
                     <span class="">tasks</span>
                 </div>
                 <div>
                     <h6>Inprogress</h6>
-                    <span class="tasks_num inprogress">10</span>
+                    <span class="tasks_num inprogress">{{  progress }}</span>
                     <span>tasks</span>
                 </div>
                 <div>
                     <h6>Completed</h6>
-                    <span class="tasks_num completed">10</span>
+                    <span class="tasks_num completed">{{  completed  }}</span>
                     <span>tasks</span>
                 </div>
             </div>
@@ -86,7 +85,7 @@
                         <tr>
                              <td> {{ row['name']  }}</td>
                             <td>{{ row['office_number']  }}</td>
-                            {%  if row['status'] == 'pending':   %}
+                            {%  if row['status'] == 'Pending':   %}
                                 <td id="pending">{{  row['status']  }}</td>                            
                             {% endif  %}
                             <td><a href="{{ url_for('row_details',username=session.name, id=row['_id'] ) }}">view</a></td>
