@@ -10,17 +10,6 @@
 
 
 
-/******  TABLE - ROW CLICKING   *******/
-
-document.addEventListener('DOMContentLoaded', () => {
-    const rows = document.querySelectorAll('tbody tr');
-    rows.forEach(row => {
-        row.addEventListener('click', () => {
-            const id = row.getAttribute('data-id');
-            window.location.href = `/details/${id}`;
-        });
-    });
-});
 
 
 
@@ -36,10 +25,26 @@ tab_btns.forEach(btn =>{
         btn.classList.add('vertical-tab-active');
 
         let targetTab = btn.getAttribute('data-tab');
-        console.log(targetTab)
         document.getElementById(targetTab).classList.add('pane-active')
     });
 });
 
+
+// horizontal tabs 
+
+let tasks_tab_btns = document.querySelectorAll('.tasks-tab-btn');
+let tasks_tab_pane = document.querySelectorAll('.tasks-tab-content');
+
+tasks_tab_btns.forEach((tab, index)=>{
+    tab.addEventListener('click', ()=>{
+        tasks_tab_btns.forEach(t_tab =>{t_tab.classList.remove('horizontal-tab-active')}) // removing the active classs
+        tab.classList.add('horizontal-tab-active') // adding active class when btn is clicked
+
+        
+        tasks_tab_pane.forEach(content => {content.classList.remove('horizontal-pane-active')})
+        tasks_tab_pane[index].classList.add('horizontal-pane-active')
+
+    })
+})
 
 

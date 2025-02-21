@@ -70,52 +70,22 @@
                 </div>
             </div>
             <div id="dashboard" class="current-tasks-section tab-pane pane-active">
-                <h2>Unallocated Tasks</h2>
-                <p>Lorem Ipsum adalah contoh teks atau.</p>
-                <div class="tasks-list ">
-                    <table id="Unallocated-tasks">
-                        <tr>
-                            <th>Name</th>
-                            <th>Office Number</th>
-                            <th>Status</th>
-                            <th>Details</th>
-                        </tr>
-                        {% for row in all_pending_queries %}
-                            {% if session.system_role == 'Administrator' : %}
-                        <tr>
-                             <td> {{ row['name']  }}</td>
-                            <td>{{ row['office_number']  }}</td>
-                            {%  if row['status'] == 'Pending':   %}
-                                <td id="pending">{{  row['status']  }}</td>                            
-                            {% endif  %}
-                            <td><a href="{{ url_for('row_details',username=session.name, id=row['_id'] ) }}">view</a></td>
-                        </tr>
-                            {% endif  %}
-                        {% endfor   %}
-                        {% if session.system_role == 'General User' : %}
-                        {%   for row in all_inprogress_queries %}
-                            <tr>
-                                <td> {{ row['name']  }}</td>
-                               <td>{{ row['office_number']  }}</td>
-                                <td id="allocated" > {{ row['status']  }}</td>
-                               <td><a href="{{ url_for('row_details',username=session.name, id=row['_id'] ) }}">view</a></td>
-                           </tr>
-                           
-                        {% endfor %}
-                        {% endif  %}
-                    </table>
-                </div>           
+      
             </div>
                         
              <!--- USER TAB    -->
             
             <div id="users" class="tab-pane">
                 <div class="horizontal-tabs">
-                    <span class="active">New User</span>
-                    <span>All Users</span>
+                    <div class="horizontal-tab-active horizontal-tab-btn" data-tab="Pending-Tasks">
+                        <span>NEW USER</span>
+                    </div>
+                    <div class="horizontal-tab-btn" data-tab="In-Progress">
+                        <span>ALL USERS</span>
+                    </div>
                 </div>
                 <div class="user-content">
-                    <h3>New User Registration</h3>
+                    <p class="descripton-paragraph">New User Registration</p>
                     <form action="/addnewuser" method="post">
                         {{ form.hidden_tag() }}
                         <div class="width-50">
@@ -135,14 +105,66 @@
                 </div>
             </div>
 
-         <!--- all tasks TAB    -->
+         <!--- PROJECTS TAB    -->
             <div id="projects" class="tab-pane">
                 <h1>PROJECTS</h1>
             </div>
 
-          <!--- PROJECTS  TAB    -->
+          <!--- ALL TASKS  TAB    -->
             <div id="allTasks" class="tab-pane">
-                <h1>ALL TASKS</h1>
+                <div class="horizontal-tabs">
+                    <div class="horizontal-tab-active tasks-tab-btn" data-tab="Pending-Tasks">
+                        <span>Pending Tasks</span>
+                    </div>
+                    <div class="tasks-tab-btn" data-tab="In-Progress">
+                        <span>In Progress Tasks</span>
+                    </div>
+                    <div class="tasks-tab-btn" data-tab="Completed-Tasks">
+                        <span>Completed Tasks</span>
+                    </div>
+                </div>
+                <div class="pending-tasks tasks-tab-content horizontal-pane-active">
+                    <p class="descripton-paragraph">Lorem Ipsum adalah contoh teks atau.</p>
+                    <div class="tasks-list ">
+                        <table id="Unallocated-tasks">
+                            <tr>
+                                <th>Name</th>
+                                <th>Office Number</th>
+                                <th>Status</th>
+                                <th>Details</th>
+                            </tr>
+                            {% for row in all_pending_queries %}
+                                {% if session.system_role == 'Administrator' : %}
+                            <tr>
+                                 <td> {{ row['name']  }}</td>
+                                <td>{{ row['office_number']  }}</td>
+                                {%  if row['status'] == 'Pending':   %}
+                                    <td id="pending">{{  row['status']  }}</td>                            
+                                {% endif  %}
+                                <td><a href="{{ url_for('row_details',username=session.name, id=row['_id'] ) }}">view</a></td>
+                            </tr>
+                                {% endif  %}
+                            {% endfor   %}
+                            {% if session.system_role == 'General User' : %}
+                            {%   for row in all_inprogress_queries %}
+                                <tr>
+                                    <td> {{ row['name']  }}</td>
+                                   <td>{{ row['office_number']  }}</td>
+                                    <td id="allocated" > {{ row['status']  }}</td>
+                                   <td><a href="{{ url_for('row_details',username=session.name, id=row['_id'] ) }}">view</a></td>
+                               </tr>
+                               
+                            {% endfor %}
+                            {% endif  %}
+                        </table>
+                    </div>     
+                </div>
+                <div class="progesssing-tasks tasks-tab-content">
+                    <h1>IN Progress Tasks</h1>
+                </div>
+                <div class="complete-tasks tasks-tab-content">
+                    <h1>COMPLETED TASKS</h1>
+                </div>
             </div>
 
         </div>
