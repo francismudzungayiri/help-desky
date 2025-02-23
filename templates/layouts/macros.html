@@ -1,0 +1,23 @@
+<!--TABLE MACRO  -->
+
+{%   macro display_table(queries)   %}
+
+<table id="Unallocated-tasks">
+    <tr>
+        <th>Name</th>
+        <th>Office Number</th>
+        <th>Status</th>
+        <th>Details</th>
+    </tr>
+    {% for row in queries %}
+        {% if session.system_role == 'Administrator' : %}
+    <tr>
+            <td> {{ row['name']  }}</td>
+        <td>{{ row['office_number']  }}</td>
+        <td>{{  row['status']  }}</td>                            
+        <td id="pending"><a href="{{ url_for('row_details',username=session.name, id=row['_id'] ) }}">view</a></td>
+    </tr>
+        {% endif  %}
+    {% endfor   %}
+</table>
+{%  endmacro  %}

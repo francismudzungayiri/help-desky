@@ -103,27 +103,31 @@ def login():
 
 @app.route('/dashboard/<username>')
 def dashboard(username):
+    
     username = session.get('name')
     role = session.get('system_role')
-    res_progress_list = []
-    res_progress = 'NOTHING TO SHOW'
+    current_Date = current_date()
     
     global count_pending
     global count_inProgress
     global count_completed
     
-    pending_queries =  {'status': 'Pending'}
+    global pending_queries
+    global allocated_queries
+    global completed_queries
+    
     if role == 'General User':
         in_progress = {'$and': [{'status': 'In Progress'},{'assigned_to':username}]}    
-        res_progress = querries_collection.find(in_progress)
-        
+        allocated_queries = querries_collection.find(in_progress)
         count_inProgress = querries_collection.count_documents(in_progress)
         
         pending = {'$and': [{'status':'Pending'},{'assigned_to':username}]}
         count_pending = querries_collection.count_documents(pending)
+        pending_queries = querries_collection.find(pending)
         
         completed = {'$and':[{'status':'Completed'}, {'assigned_to': username}]}
         count_completed = querries_collection.count_documents(completed)
+        completed_queries = querries_collection.find(completed)
     
     else:
         
@@ -131,27 +135,23 @@ def dashboard(username):
         count_pending = querries_collection.count_documents({'status':'Pending'})
         count_completed = querries_collection.count_documents({'status':'Completed'})
         
-            
-    
-    res_pending = querries_collection.find(pending_queries)
-   
-    
+        allocated_queries = querries_collection.find({'status':'In Progress'})
+        pending_queries = querries_collection.find({'status':'Pending'})
+        completed_queries = querries_collection.find({'status':'Completed'})
+        
     form = forms.NewUser()  
-    res_progress_list = list(res_progress)
-    
-    current_Date = current_date()
-    
-         
+     
     return render_template(
         'dashboard.html',
         username = username,
-        all_pending_queries = res_pending,
-        all_inprogress_queries = res_progress_list,
+        all_pending_queries = pending_queries,
+        all_allocated_queries = allocated_queries,
+        all_completed_queries = completed_queries,
         form = form,
         current_Date = current_Date, 
         pending = count_pending,
         progress = count_inProgress,
-        completed = count_completed
+        completed = count_completed,
     )
     
     
@@ -192,8 +192,7 @@ def row_details(username, id):
     form = forms.Assign_Query()
     completeTask = forms.Commplete_Task()
     
-    pending_condition =  {'status': 'Pending'}
-    progress_condition = {'$and':[{'status':'In Progress'},{'assigned_to': username}]}
+    progress_condition = {'assigned_to': username}
     role = session.get('system_role')
     username = session.get('name')
 
@@ -201,7 +200,7 @@ def row_details(username, id):
     res =None
     query = None
     if role== 'Administrator':    
-        res = querries_collection.find(pending_condition)
+        res = querries_collection.find()
         query = next((query for query in res if query['_id'] == ObjectId(id)), None)
     else:
         res = querries_collection.find(progress_condition)

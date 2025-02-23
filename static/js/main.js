@@ -31,6 +31,7 @@ tab_btns.forEach(btn =>{
 
 
 // horizontal tabs 
+// TASKS TABLES
 
 let tasks_tab_btns = document.querySelectorAll('.tasks-tab-btn');
 let tasks_tab_pane = document.querySelectorAll('.tasks-tab-content');
@@ -46,5 +47,9 @@ tasks_tab_btns.forEach((tab, index)=>{
 
     })
 })
+
+//USERS TABS
+
+
 
 

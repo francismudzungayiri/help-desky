@@ -40,7 +40,7 @@
                     </p>
                     
                 </div>
-                {% if session.system_role == 'Administrator' : %}
+                {% if session.system_role == 'Administrator' and query['status']=='Pending': %}
                 <div>
                     <form action="{{ url_for('assign_query') }}", method="POST">
                         {{ form.hidden_tag() }}

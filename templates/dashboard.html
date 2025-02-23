@@ -1,6 +1,10 @@
 {%  extends 'base.html' %}
 
 {%  block content %}
+
+{%  import './layouts/macros.html' as macros  %}
+
+
     <div class="container">
         <!----------------- COLUMN 1--------------------------->
         <div class="column1"><!----
@@ -77,14 +81,14 @@
             
             <div id="users" class="tab-pane">
                 <div class="horizontal-tabs">
-                    <div class="horizontal-tab-active horizontal-tab-btn" data-tab="Pending-Tasks">
+                    <div class="users-tab-active users-tab-btn">
                         <span>NEW USER</span>
                     </div>
-                    <div class="horizontal-tab-btn" data-tab="In-Progress">
+                    <div class="users-tab-btn">
                         <span>ALL USERS</span>
                     </div>
                 </div>
-                <div class="user-content">
+                <div class="user-content users-content-active">
                     <p class="descripton-paragraph">New User Registration</p>
                     <form action="/addnewuser" method="post">
                         {{ form.hidden_tag() }}
@@ -102,6 +106,10 @@
                         </div>                    
                        <button id="login_signin_btn">Register</button>
                     </form>
+                </div>
+                <div class="user-content">
+                    <h1>ALL USERS</h1>
+
                 </div>
             </div>
 
@@ -126,44 +134,18 @@
                 <div class="pending-tasks tasks-tab-content horizontal-pane-active">
                     <p class="descripton-paragraph">Lorem Ipsum adalah contoh teks atau.</p>
                     <div class="tasks-list ">
-                        <table id="Unallocated-tasks">
-                            <tr>
-                                <th>Name</th>
-                                <th>Office Number</th>
-                                <th>Status</th>
-                                <th>Details</th>
-                            </tr>
-                            {% for row in all_pending_queries %}
-                                {% if session.system_role == 'Administrator' : %}
-                            <tr>
-                                 <td> {{ row['name']  }}</td>
-                                <td>{{ row['office_number']  }}</td>
-                                {%  if row['status'] == 'Pending':   %}
-                                    <td id="pending">{{  row['status']  }}</td>                            
-                                {% endif  %}
-                                <td><a href="{{ url_for('row_details',username=session.name, id=row['_id'] ) }}">view</a></td>
-                            </tr>
-                                {% endif  %}
-                            {% endfor   %}
-                            {% if session.system_role == 'General User' : %}
-                            {%   for row in all_inprogress_queries %}
-                                <tr>
-                                    <td> {{ row['name']  }}</td>
-                                   <td>{{ row['office_number']  }}</td>
-                                    <td id="allocated" > {{ row['status']  }}</td>
-                                   <td><a href="{{ url_for('row_details',username=session.name, id=row['_id'] ) }}">view</a></td>
-                               </tr>
-                               
-                            {% endfor %}
-                            {% endif  %}
-                        </table>
+                        {{ macros.display_table(all_pending_queries)  }}
                     </div>     
                 </div>
                 <div class="progesssing-tasks tasks-tab-content">
-                    <h1>IN Progress Tasks</h1>
+
+                    {{ macros.display_table(all_allocated_queries )  }}
+                    
                 </div>
                 <div class="complete-tasks tasks-tab-content">
-                    <h1>COMPLETED TASKS</h1>
+                    
+                    {{ macros.display_table(all_completed_queries)  }}
+
                 </div>
             </div>
 
