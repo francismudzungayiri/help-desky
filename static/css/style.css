@@ -636,6 +636,17 @@ table tr a:hover{
 .tab-pane.pane-active{
     display: block;
 }
+.user-content{
+    display: none;
+}
+.user-content-active{
+    display: block;
+}
+.users-tab-active{
+    color: var(--heading);
+    font-weight: 700;
+}
+
 /************************************************User Management Pge Styling*******************************/
 
 #users{
@@ -664,7 +675,7 @@ h3{
     color: var(--heading);
 }
 .user-content{
-    padding: 0 5%;
+    padding: 0 3%;
 }
 .descripton-paragraph{
     margin: 2em 0 1em 0;

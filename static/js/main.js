@@ -38,18 +38,29 @@ let tasks_tab_pane = document.querySelectorAll('.tasks-tab-content');
 
 tasks_tab_btns.forEach((tab, index)=>{
     tab.addEventListener('click', ()=>{
-        tasks_tab_btns.forEach(t_tab =>{t_tab.classList.remove('horizontal-tab-active')}) // removing the active classs
-        tab.classList.add('horizontal-tab-active') // adding active class when btn is clicked
+        tasks_tab_btns.forEach(t_tab =>{t_tab.classList.remove('horizontal-tab-active')}); // removing the active classs
+        tab.classList.add('horizontal-tab-active'); // adding active class when btn is clicked
 
         
-        tasks_tab_pane.forEach(content => {content.classList.remove('horizontal-pane-active')})
-        tasks_tab_pane[index].classList.add('horizontal-pane-active')
+        tasks_tab_pane.forEach(content => {content.classList.remove('horizontal-pane-active')});
+        tasks_tab_pane[index].classList.add('horizontal-pane-active');
 
     })
 })
 
 //USERS TABS
+let user_tab_btns = document.querySelectorAll('.users-tab-btn');
+let user_tab_content = document.querySelectorAll('.user-content');
 
+user_tab_btns.forEach((tab, index)=>{
+    tab.addEventListener('click', ()=>{
+        user_tab_btns.forEach(user_tab =>{user_tab.classList.remove('users-tab-active')});
+        tab.classList.add('users-tab-active')
+
+        user_tab_content.forEach(content =>{content.classList.remove('user-content-active')})
+        user_tab_content[index].classList.add('user-content-active');
+    });
+});
 
 
 

@@ -116,6 +116,8 @@ def dashboard(username):
     global allocated_queries
     global completed_queries
     
+    global all_users
+    
     if role == 'General User':
         in_progress = {'$and': [{'status': 'In Progress'},{'assigned_to':username}]}    
         allocated_queries = querries_collection.find(in_progress)
@@ -139,6 +141,8 @@ def dashboard(username):
         pending_queries = querries_collection.find({'status':'Pending'})
         completed_queries = querries_collection.find({'status':'Completed'})
         
+        all_users = users_collection.find()
+        
     form = forms.NewUser()  
      
     return render_template(
@@ -152,6 +156,7 @@ def dashboard(username):
         pending = count_pending,
         progress = count_inProgress,
         completed = count_completed,
+        users= all_users
     )
     
     
@@ -209,6 +214,10 @@ def row_details(username, id):
     
     if query:    
         return render_template('table_row.html', username = username, query = query, form=form, complete_task = completeTask )
+@app.route('/dashboard/<username>/<profile_id>')
+def profile():
+    pass
+
 
 
 @app.route('/assign-pending-query', methods=['POST'])

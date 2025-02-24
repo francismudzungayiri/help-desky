@@ -81,14 +81,14 @@
             
             <div id="users" class="tab-pane">
                 <div class="horizontal-tabs">
-                    <div class="users-tab-active users-tab-btn">
+                    <div class="users-tab-btn users-tab-active">
                         <span>NEW USER</span>
                     </div>
                     <div class="users-tab-btn">
-                        <span>ALL USERS</span>
+                        <span>All Users</span>
                     </div>
                 </div>
-                <div class="user-content users-content-active">
+                <div class="user-content user-content-active">
                     <p class="descripton-paragraph">New User Registration</p>
                     <form action="/addnewuser" method="post">
                         {{ form.hidden_tag() }}
@@ -108,8 +108,20 @@
                     </form>
                 </div>
                 <div class="user-content">
-                    <h1>ALL USERS</h1>
-
+                    <table>
+                        <tr>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Details</th>
+                        </tr>
+                        {% for user in users: %}
+                        <tr>
+                            <td>{{user.first_name}} {{ user.last_name }}</td>
+                            <td>{{user.position}}</td>
+                            <td id="pending">View</td>
+                        </tr>
+                        {% endfor  %}
+                    </table>
                 </div>
             </div>
 
