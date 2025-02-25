@@ -740,3 +740,13 @@ h3{
     text-align: center;
     color: var(--pending);
 }
+.delete_btn{
+    background-color: var(--pending);
+    color: #FFFFFF;
+    margin:  2em 0;
+    display: block;
+}
+.delete_btn:hover{
+    background-color: transparent;
+    border: 1px solid var(--pending);
+}

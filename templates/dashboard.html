@@ -118,7 +118,7 @@
                         <tr>
                             <td>{{user.first_name}} {{ user.last_name }}</td>
                             <td>{{user.position}}</td>
-                            <td id="pending">View</td>
+                            <td id="pending"><a href="{{  url_for('profile', username = session.name, user_id = user['_id'])  }}">View</a></td>
                         </tr>
                         {% endfor  %}
                     </table>

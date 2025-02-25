@@ -1,5 +1,5 @@
 from bson import ObjectId
-from flask import Flask, render_template, request, flash,redirect, url_for, session
+from flask import Flask, jsonify, render_template, request, flash,redirect, url_for, session
 import forms as forms
 from dotenv import load_dotenv
 import os 
@@ -141,7 +141,7 @@ def dashboard(username):
         pending_queries = querries_collection.find({'status':'Pending'})
         completed_queries = querries_collection.find({'status':'Completed'})
         
-        all_users = users_collection.find()
+    all_users = users_collection.find()
         
     form = forms.NewUser()  
      
@@ -214,10 +214,38 @@ def row_details(username, id):
     
     if query:    
         return render_template('table_row.html', username = username, query = query, form=form, complete_task = completeTask )
-@app.route('/dashboard/<username>/<profile_id>')
-def profile():
-    pass
 
+
+@app.route('/dashboard/<username>/users/<user_id>')
+def profile(username, user_id):
+    username = session.get('name')
+    
+    result = users_collection.find()
+    iterable = (user for user in result if user['_id'] == ObjectId(user_id))
+    query = next(iterable, 'No more users to retrive')
+    
+    if  query:
+        return render_template('profile.html', username=username, user= query)
+
+
+@app.route('/delete/user/<user_id>', methods=['POST'])
+def deleteUser(user_id):
+    user = session.get('name')
+    try:
+        user_id = ObjectId(user_id)
+    except:
+        return jsonify({'error':'NO USER IS FOUND'}), 404
+    
+    
+    result = users_collection.delete_one({'_id': user_id})
+    if result.deleted_count == 1:
+        return redirect(url_for('dashboard', username= user))
+        
+        
+        
+    
+    
+    
 
 
 @app.route('/assign-pending-query', methods=['POST'])

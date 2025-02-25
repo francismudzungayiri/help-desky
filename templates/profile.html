@@ -1,0 +1,40 @@
+{% extends 'base.html'%}
+{% block content %}
+    <section id="logInSection">
+        <div class="wrapper">
+            <div class="details">
+                <h1>
+                    <span id="signText">User </span>
+                    <span id="inText">Profile</span>
+                </h1>
+                <div>
+                    <p>
+                        <span>Name: </span>
+                        <span class="thin">{{ user['first_name'] }} {{user['last_name'] }}</span>
+                    </p>
+                    <p>
+                        <span>Email: </span>
+                        <span class="thin">{{  user['email']  }}</span>
+                    </p>
+                    
+                </div>
+                <div>
+                    <p>
+                        <span>System role: </span>
+                        <span class="thin">{{ user['system_role'] }}</span>
+                    </p>
+                    <p>
+                        <span>Position: </span>
+                        <span class="thin">{{  user['position']  }}</span>
+                    </p>
+                    
+                </div>
+                <form action="{{ url_for('deleteUser', user_id = user['_id'])   }}", method="post">
+                    <button class="delete_btn">Delete user</button>
+                </form>
+                <a id="go-back" class="goBack" href="  {{ url_for('dashboard', username=session.name)  }} ">Go back</a>
+            </div>
+            
+        </div>    
+    </section>
+{% endblock %}
