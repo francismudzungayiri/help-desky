@@ -3,7 +3,7 @@ from flask import Flask, jsonify, render_template, request, flash,redirect, url_
 import forms as forms
 from dotenv import load_dotenv
 import os 
-from standalone import ticketing
+from standalone import ticketing, getCurrentTime, getDate
 from pymongo import MongoClient
 from flask_session import Session
 from flask_bcrypt import Bcrypt
@@ -31,13 +31,6 @@ db = client['Help-Desky']
 querries_collection = db['querries'] # querries collection
 users_collection = db['users']
 
-
-def current_date():
-    today = date.today()
-    current = today.strftime("%d %b %Y")
-    
-    
-    return current
     
 
 @app.route('/', methods = ['POST', 'GET'])
@@ -57,7 +50,9 @@ def home():
             'office_number': office,
             'department': department,
             'problem_faced': problem,
-            'ticket': ticket_number,
+            'ticket_number': ticket_number,
+            'posted_date': getDate(),
+            'posted_time': getCurrentTime(),
             'status': 'Pending'
         }
         
@@ -106,7 +101,7 @@ def dashboard(username):
     
     username = session.get('name')
     role = session.get('system_role')
-    current_Date = current_date()
+    current_Date = getDate()
     
     global count_pending
     global count_inProgress

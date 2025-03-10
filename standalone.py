@@ -1,4 +1,5 @@
 import random as rd
+from datetime import datetime
 
 
 def ticketing():
@@ -10,6 +11,32 @@ def ticketing():
     
     
     return ticket_number
+
+def getDate():
+    today = datetime.today()
+    current = today.strftime("%d %b %Y") 
+    return current
+
+
+def getCurrentTime():
+    now = datetime.now()
+    current_time = now.strftime("%H:%M:%S")
+    return current_time
+
+def dateCalculator(today, last):
+    todae = datetime(today)
+    previous = datetime(last)
+    
+    num = todae - previous
+    result = ''
+    if(num == 0):
+        result = 'Today'
+    elif (num == 1):
+        result = 'Yesterday'
+    else:
+        result = f'{result}days ago'
+    
+    return result
     
     
     

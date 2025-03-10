@@ -1,168 +1,203 @@
-{%  extends 'base.html' %}
+{% extends 'base.html' %} {% block content %} {% import './layouts/macros.html'
+as macros %}
 
-{%  block content %}
-
-{%  import './layouts/macros.html' as macros  %}
-
-
-    <div class="container">
-        <!----------------- COLUMN 1--------------------------->
-        <div class="column1"><!----
+<div class="container">
+  <!----------------- COLUMN 1--------------------------->
+  <div class="column1">
+    <!----
             <img id="logo_dashboard" src="../static/images  - helpDesk/logo.png" alt="logo">
             <div class="text_dashboard">
                 <p id="help_dashboard">Help</p>
                 <p id="desk_dashboard">Desk</p>
             </div>-->
-
-            <div class="nav_text">
-                <span id="help_text">Help</span>
-                <span id="desk_text">Deskie</span>
-            </div>
-            <div class="vertical-nav">
-                <div class="vertical-tab-active tab-btn" data-tab="dashboard">
-                    <span>Dashboard</span>
-                </div>
-                {% if session.system_role == 'Administrator':%}
-                <div class="tab-btn" data-tab="users">
-                    <span>Users</span>
-                </div>
-                {%  endif  %}
-                <div class="tab-btn" data-tab="projects">
-                    <span>Projects</span>
-                </div>
-                <div class="tab-btn" data-tab="allTasks">
-                    {% if session.system_role == 'Administrator' : %}
-                        <span>Tasks</span>
-                    {% else: %}
-                        <span>My Tasks</span>
-                    {% endif  %}
-                </div>
-            </div>    
-                <div class="logout-container">
-                    <div>
-                        <a id="logout-text" href="  {{  url_for('logout')  }}">Logout</a>
-                    </div>
-                </div>
-        
+    {% set user = session.name %}
+    <div class="nav_text">
+      <span id="help_text">Help</span>
+      <span id="desk_text">Deskie</span>
+    </div>
+    <div class="vertical-nav">
+      <div class="vertical-tab-active tab-btn" data-tab="dashboard">
+        <span>Dashboard</span>
+      </div>
+      {% if session.system_role == 'Administrator':%}
+      <div class="tab-btn" data-tab="users">
+        <span>Users</span>
+      </div>
+      {% endif %}
+      <div class="tab-btn" data-tab="projects">
+        <span>Projects</span>
+      </div>
+      <div class="tab-btn" data-tab="pending-tasks">
+        {% if session.system_role == 'Administrator' : %}
+        <span>Pending Tasks</span>
+        {% endif %}
+      </div>
+      <div class="tab-btn" data-tab="inprogress-tasks">
+        {% if session.system_role == 'Administrator' : %}
+        <span>InprogresssTasks</span>
+        {% else: %}
+        <span>My Inprogress Tasks</span>
+        {% endif %}
+      </div>
+      <div class="tab-btn" data-tab="completed-tasks">
+        {% if session.system_role == 'Administrator' : %}
+        <span>Completed Tasks</span>
+        {% else: %}
+        <span>My Completed Tasks</span>
+        {% endif %}
+      </div>
+    </div>
+    <div class="logout-container">
+      <div
+        class="profile"
+        onmouseover="mouseOver()"
+        onmouseout="setTimeout(mouseOut, 5000)"
+      >
+        {{user[0].upper()}}
+      </div>
+      <div>
+        <div class="profile-box">
+          <a href="#">Profile</a>
+          <a href="  {{  url_for('logout')  }}">Logout</a>
         </div>
-        <!----------------- COLUMN 2--------------------------->
-        <div class="column2">
-            <div class="main_content_container">
-                <div class="main_text_hello">
-                    <span id="hello">Hello,</span> <span id="name">{{ session.name }}</span>
-                    <h2>Lorem Ipsum adalah contoh teks atau dummy dalam industri percetaka</h2>
-                </div>
-                <div class="date_time">
-                    <span class="date_text">{{ current_Date }}</span>
-                </div>
-            </div>
-            <div class="summary_container">
-                <div>
-                    <h6>Pending</h6>
-                    <span class="tasks_num pending">{{ pending }}</span>
-                    <span class="">tasks</span>
-                </div>
-                <div>
-                    <h6>Inprogress</h6>
-                    <span class="tasks_num inprogress">{{  progress }}</span>
-                    <span>tasks</span>
-                </div>
-                <div>
-                    <h6>Completed</h6>
-                    <span class="tasks_num completed">{{  completed  }}</span>
-                    <span>tasks</span>
-                </div>
-            </div>
-            <div id="dashboard" class="current-tasks-section tab-pane pane-active">
-      
-            </div>
-                        
-             <!--- USER TAB    -->
-            
-            <div id="users" class="tab-pane">
-                <div class="horizontal-tabs">
-                    <div class="users-tab-btn users-tab-active">
-                        <span>NEW USER</span>
-                    </div>
-                    <div class="users-tab-btn">
-                        <span>All Users</span>
-                    </div>
-                </div>
-                <div class="user-content user-content-active">
-                    <p class="descripton-paragraph">New User Registration</p>
-                    <form action="/addnewuser" method="post">
-                        {{ form.hidden_tag() }}
-                        <div class="width-50">
-                            {{  form.firstname(class='loginputs', placeholder='First Name')  }}
-                            {{  form.surname(class='loginputs', placeholder='Last Name')   }}
-                        </div>
-                        <div class="width-50">
-                            {{  form.useremail(class='loginputs', placeholder='Email Address')  }}
-                            {{  form.system_role(class='loginputs')   }}
-                        </div>
-                        <div class="width-50">
-                            {{  form.position( class='loginputs', placeholder='Work Position')   }}
-                            {{  form.password(class='loginputs', placeholder = 'Password') }}
-                        </div>                    
-                       <button id="login_signin_btn">Register</button>
-                    </form>
-                </div>
-                <div class="user-content">
-                    <table>
-                        <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Details</th>
-                        </tr>
-                        {% for user in users: %}
-                        <tr>
-                            <td>{{user.first_name}} {{ user.last_name }}</td>
-                            <td>{{user.position}}</td>
-                            <td id="pending"><a href="{{  url_for('profile', username = session.name, user_id = user['_id'])  }}">View</a></td>
-                        </tr>
-                        {% endfor  %}
-                    </table>
-                </div>
-            </div>
-
-         <!--- PROJECTS TAB    -->
-            <div id="projects" class="tab-pane">
-                <h1>PROJECTS</h1>
-            </div>
-
-          <!--- ALL TASKS  TAB    -->
-            <div id="allTasks" class="tab-pane">
-                <div class="horizontal-tabs">
-                    <div class="horizontal-tab-active tasks-tab-btn" data-tab="Pending-Tasks">
-                        <span>Pending Tasks</span>
-                    </div>
-                    <div class="tasks-tab-btn" data-tab="In-Progress">
-                        <span>In Progress Tasks</span>
-                    </div>
-                    <div class="tasks-tab-btn" data-tab="Completed-Tasks">
-                        <span>Completed Tasks</span>
-                    </div>
-                </div>
-                <div class="pending-tasks tasks-tab-content horizontal-pane-active">
-                    <p class="descripton-paragraph">Lorem Ipsum adalah contoh teks atau.</p>
-                    <div class="tasks-list ">
-                        {{ macros.display_table(all_pending_queries)  }}
-                    </div>     
-                </div>
-                <div class="progesssing-tasks tasks-tab-content">
-
-                    {{ macros.display_table(all_allocated_queries )  }}
-                    
-                </div>
-                <div class="complete-tasks tasks-tab-content">
-                    
-                    {{ macros.display_table(all_completed_queries)  }}
-
-                </div>
-            </div>
-
-        </div>
+      </div>
+    </div>
+  </div>
+  <!----------------- COLUMN 2--------------------------->
+  <div class="column2">
+    <div class="main_content_container">
+      <div class="main_text_hello">
+        <span id="hello">Hello,</span> <span id="name">{{ session.name }}</span>
+      </div>
+      <div class="date_time">
+        <span class="date_text">{{ current_Date }}</span>
+      </div>
     </div>
 
-    <script type="text/javascript" src="{{ url_for('static', filename = 'js/main.js')  }}"></script>
+    <div id="dashboard" class="current-tasks-section tab-pane pane-active">
+      <h2>Dashboard</h2>
+      <p class="summary-col">
+        Lorem Ipsum adalah contoh teks atau dummy dalam industri percetaka
+      </p>
+      <div class="summary_container">
+        <div>
+          <h6>Pending</h6>
+          <span class="tasks_num pending">{{ pending }}</span>
+          <span class="">tasks</span>
+        </div>
+        <div>
+          <h6>Inprogress</h6>
+          <span class="tasks_num inprogress">{{ progress }}</span>
+          <span>tasks</span>
+        </div>
+        <div>
+          <h6>Completed</h6>
+          <span class="tasks_num completed">{{ completed }}</span>
+          <span>tasks</span>
+        </div>
+      </div>
+    </div>
+
+    <!--- USER TAB    -->
+
+    <div id="users" class="tab-pane">
+      <h2>Users</h2>
+      <p class="summary-col">
+        Lorem Ipsum adalah contoh teks atau dummy dalam industri percetaka
+      </p>
+      <div class="horizontal-tabs">
+        <div class="users-tab-btn users-tab-active">
+          <span>NEW USER</span>
+        </div>
+        <div class="users-tab-btn">
+          <span>All Users</span>
+        </div>
+      </div>
+      <div class="user-content user-content-active">
+        <p class="descripton-paragraph">New User Registration</p>
+        <form action="/addnewuser" method="post">
+          {{ form.hidden_tag() }}
+          <div class="width-50">
+            {{ form.firstname(class='loginputs', placeholder='First Name') }} {{
+            form.surname(class='loginputs', placeholder='Last Name') }}
+          </div>
+          <div class="width-50">
+            {{ form.useremail(class='loginputs', placeholder='Email Address') }}
+            {{ form.system_role(class='loginputs') }}
+          </div>
+          <div class="width-50">
+            {{ form.position( class='loginputs', placeholder='Work Position') }}
+            {{ form.password(class='loginputs', placeholder = 'Password') }}
+          </div>
+          <button id="login_signin_btn">Register</button>
+        </form>
+      </div>
+      <div class="user-content">
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Details</th>
+          </tr>
+          {% for user in users: %}
+          <tr>
+            <td>{{user.first_name}} {{ user.last_name }}</td>
+            <td>{{user.position}}</td>
+            <td id="pending">
+              <a
+                href="{{  url_for('profile', username = session.name, user_id = user['_id'])  }}"
+                >View</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+
+    <!--- PROJECTS TAB    -->
+    <div id="projects" class="tab-pane">
+      <h2>Projects</h2>
+      <p class="summary-col">
+        Lorem Ipsum adalah contoh teks atau dummy dalam industri percetaka
+      </p>
+    </div>
+
+    <!--- ALL TASKS  TAB    -->
+    <div id="pending-tasks" class="tab-pane">
+      <h2>Pending Tasks</h2>
+      <p class="summary-col">Lorem Ipsum adalah contoh teks atau.</p>
+      <div class="tasks-grid">
+        {{ macros.display_Card(all_pending_queries) }}
+      </div>
+    </div>
+
+    <!--- INPROGERESS TAB    -->
+    <div id="inprogress-tasks" class="tab-pane">
+      <h2>In-Progress Tasks</h2>
+      <p class="summary-col">
+        Lorem Ipsum adalah contoh teks atau dummy dalam industri percetaka
+      </p>
+      <div class="tasks-grid">
+        {{ macros.display_Card(all_allocated_queries ) }}
+      </div>
+    </div>
+
+    <!--- completed Task TAB    -->
+    <div id="completed-tasks" class="tab-pane">
+      <h2>Completed Taks</h2>
+      <p class="summary-col">
+        Lorem Ipsum adalah contoh teks atau dummy dalam industri percetaka
+      </p>
+      <div class="tasks-grid">
+        {{ macros.display_Card(all_pending_queries) }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script
+  type="text/javascript"
+  src="{{ url_for('static', filename = 'js/main.js')  }}"
+></script>
 {% endblock %}

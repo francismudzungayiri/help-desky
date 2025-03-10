@@ -1,21 +1,43 @@
 <!--TABLE MACRO  -->
 
-{%   macro display_table(queries)   %}
+{% macro display_table(queries) %}
 
 <table id="Unallocated-tasks">
-    <tr>
-        <th>Name</th>
-        <th>Office Number</th>
-        <th>Status</th>
-        <th>Details</th>
-    </tr>
-    {% for row in queries %}
-    <tr>
-            <td> {{ row['name']  }}</td>
-        <td>{{ row['office_number']  }}</td>
-        <td>{{  row['status']  }}</td>                            
-        <td id="pending"><a href="{{ url_for('row_details',username=session.name, id=row['_id'] ) }}">view</a></td>
-    </tr>
-    {% endfor   %}
+  <tr>
+    <th>Name</th>
+    <th>Office Number</th>
+    <th>Status</th>
+    <th>Details</th>
+  </tr>
+  {% for row in queries %}
+  <tr>
+    <td>{{ row['name'] }}</td>
+    <td>{{ row['office_number'] }}</td>
+    <td>{{ row['status'] }}</td>
+    <td id="pending">
+      <a
+        href="{{ url_for('row_details',username=session.name, id=row['_id'] ) }}"
+        >view</a
+      >
+    </td>
+  </tr>
+  {% endfor %}
 </table>
-{%  endmacro  %}
+{% endmacro %} {% macro display_Card(queries) %} {% for row in queries %}
+<div class="task-box">
+  <div>
+    <h3>{{row['name'] }}</h3>
+    <p id="department">{{row['department'] }}</p>
+    <p id="challenge">{{ row['problem_faced'] }}</p>
+  </div>
+
+  <div id="last-row">
+    <span>{{row['posted_date'] }}</span>
+    <a
+      href="{{ url_for('row_details',username=session.name, id=row['_id'] ) }}"
+    >
+      {%if row['status']== ''%} Assign
+    </a>
+  </div>
+</div>
+{% endfor %} {% endmacro %}
