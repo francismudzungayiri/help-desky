@@ -36,7 +36,7 @@
     <a
       href="{{ url_for('row_details',username=session.name, id=row['_id'] ) }}"
     >
-      {%if row['status']== ''%} Assign
+      {%if row['status']== 'Pending'%} Assign {% else %} View{% endif %}
     </a>
   </div>
 </div>

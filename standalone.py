@@ -35,8 +35,9 @@ def dateCalculator(today, last):
         result = 'Yesterday'
     else:
         result = f'{result}days ago'
-    
+        
     return result
+    
     
     
     

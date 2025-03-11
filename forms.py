@@ -38,9 +38,9 @@ class Assign_Query(FlaskForm):
     users_collection = db['users']
     
     
-    ASSIGN_TO= users_collection.distinct('first_name', {'system_role':'General User'})
+    ASSIGN_TO= users_collection.find({'system_role':'General User'})
 
-    assign_to = SelectField('Assign Person', choices=[name.title() for name in ASSIGN_TO], validators=[InputRequired()])
+    assign_to = SelectField('Assign Person', choices=[user['first_name'] +' '+ user['last_name'] for user in ASSIGN_TO], validators=[InputRequired()])
     id = StringField()
     
     

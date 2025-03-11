@@ -31,6 +31,7 @@ html {
 }
 body {
   overflow-x: hidden;
+  overflow-y: auto;
   width: 100%;
   font-size: 16px;
   background-color: var(--background);
@@ -454,22 +455,21 @@ footer a {
 /*****  ********************* styling column 1 - Dashboard ****** **********************/
 .container {
   font-family: var(--headingFont);
-  height: 93vh;
-  width: 95%;
+  width: 100vw;
   display: flex;
   justify-content: space-between;
-  gap: 2vw;
-  margin: 2%;
 }
 .column1 {
   padding: 2%;
-  height: 100%;
-  width: 18vw;
+  height: 100vh;
+  width: 15vw;
   background-color: var(--containers);
   display: flex;
+  position: fixed;
+  left: 0;
+  top: 0;
   flex-direction: column;
   justify-content: space-between;
-  border-radius: 1em;
 }
 .logo_container {
   display: flex;
@@ -537,10 +537,10 @@ footer a {
 }
 /*****  ********************* styling column 2 - Dashboard ****** **********************/
 .column2 {
-  width: 80vw;
-  border-radius: 1em;
-  background-color: var(--containers);
+  width: 85vw;
+  background-color: var(--background);
   padding: 2% 5%;
+  margin-left: 15vw;
 }
 .main_content_container {
   display: flex;
@@ -691,7 +691,7 @@ table tr a:hover {
   border-radius: 10px;
   border-bottom: 1px solid var(--heading);
   display: flex;
-  background-color: var(--background);
+  background-color: var(--containers);
   /*
   box-shadow: 0 4px 4px 0 #1b3354, 0 6px 10px 0 #1b3354;*/
   justify-content: space-between;
@@ -720,6 +720,9 @@ table tr a:hover {
   font-size: 0.8em;
   color: var(--grey);
   margin-bottom: 0.8em;
+}
+#challenge {
+  font-size: 0.9em;
 }
 .task-box #last-row {
   display: flex;
@@ -774,7 +777,7 @@ h3 {
 
 /********** VIEW TABLE ROW DETAILS **********/
 .details {
-  width: 60%;
+  width: 80%;
   background-color: var(--containers);
   padding: 5%;
 }
@@ -784,25 +787,36 @@ h3 {
   font-weight: 500;
 }
 .details h1 {
-  margin-bottom: 2em;
+  margin: 2em 0;
 }
 .details div p {
   width: 45%;
-  display: flex;
-  justify-content: space-between;
   margin-bottom: 2em;
 }
-.details div {
+.details .split {
   display: flex;
   justify-content: space-between;
+}
+.detail-problem {
+  width: 100%;
+  display: block;
+}
+.detail-problem span {
+  font-size: 0.7em;
+  color: var(--secondary-text);
 }
 .details div p .bold {
   font-weight: 700;
 }
+.details div p span {
+  font-size: 0.7em;
+  color: var(--secondary-text);
+}
 .details div p .thin {
-  font-weight: 300;
-  color: var(--heading);
-  text-align: right;
+  font-weight: 500;
+  font-size: 1.1em;
+  color: var(--white);
+  display: block;
 }
 .details div form {
   margin-top: 2em;
@@ -813,8 +827,11 @@ h3 {
   display: none;
 }
 .goBack {
-  margin-top: 2em;
+  margin: 1.5em 0;
+  padding: 0.5em;
+  border: 1px solid var(--praragraph);
   width: 100%;
+  border-radius: 0.8em;
   text-align: center;
   color: var(--pending);
 }

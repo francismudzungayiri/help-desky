@@ -46,10 +46,10 @@ def home():
         ticket_number = ticketing()
         
         data = {
-            'name':name,
-            'office_number': office,
-            'department': department,
-            'problem_faced': problem,
+            'name':name.title(),
+            'office_number': office.title(),
+            'department': department.title(),
+            'problem_faced': problem.title(),
             'ticket_number': ticket_number,
             'posted_date': getDate(),
             'posted_time': getCurrentTime(),

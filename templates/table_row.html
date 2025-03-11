@@ -1,72 +1,79 @@
-{% extends 'base.html'%}
-{% block content %}
-    <section id="logInSection">
-        <div class="wrapper">
-            <div class="details">
-                <h1>
-                    <span id="signText">Ticket </span>
-                    <span id="inText">Details</span>
-                </h1>
-                <div>
-                    <p>
-                        <span>Name: </span>
-                        <span class="thin">{{ query['name'] }}</span>
-                    </p>
-                    <p>
-                        <span>Office number: </span>
-                        <span class="thin">{{  query['office_number']  }}</span>
-                    </p>
-                    
-                </div>
-                <div>
-                    <p>
-                        <span>Department: </span>
-                        <span class="thin">{{ query['department'] }}</span>
-                    </p>
-                    <p>
-                        <span>Challenge: </span>
-                        <span class="thin">{{  query['problem_faced']  }}</span>
-                    </p>
-                    
-                </div>
-                <div>
-                    <p>
-                        <span>Status: </span>
-                        <span class="thin">{{ query['status'] }}</span>
-                    </p>
-                    <p>
-                        <span>Ticket Number: </span>
-                        <span class="thin">{{  query['ticket']  }}</span>
-                    </p>
-                    
-                </div>
-                {% if session.system_role == 'Administrator' and query['status']=='Pending': %}
-                <div>
-                    <form action="{{ url_for('assign_query') }}", method="POST">
-                        {{ form.hidden_tag() }}
-                        <label for="assign">Assign to: </label>
-                        {{   form.assign_to(class='loginputs')    }}
-                        {{   form.id( id='disabled', class='loginputs', value=query['_id'])     }}
-                        <button id="login_signin_btn">ASSIGN</button>
-                    </form>                
-                </div>
-                {%  endif  %}
-                {% if session.system_role == 'General User'%}
-                <div>
-                    <form action="{{ url_for('complete_task') }}", method="POST">
-                        {{ complete_task.hidden_tag() }}
-                        <label for="assign">If task completed click below: </label>
-                        {{   complete_task.comment(class='problem-faced' )    }}
-                        {{   complete_task.id( id='disabled', class='loginputs', value=query['_id'])     }}
-                        <button id="login_signin_btn">Task Completed</button>
-                    </form>                
-                </div>
+{% extends 'base.html'%} {% block content %}
+<section id="logInSection">
+  <div class="wrapper">
+    <div class="details">
+      <a
+        id="go-back"
+        class="goBack"
+        href="  {{ url_for('dashboard', username=session.name)  }} "
+        >Go back</a
+      >
+      <h1>
+        <span id="signText">Ticket </span>
+        <span id="inText">Details</span>
+      </h1>
+      <div class="split">
+        <p>
+          <span>Name: </span>
+          <span class="thin">{{ query['name'] }}</span>
+        </p>
+        <p>
+          <span>Office number: </span>
+          <span class="thin">{{ query['office_number'] }}</span>
+        </p>
+      </div>
+      <div class="split">
+        <p>
+          <span>Department: </span>
+          <span class="thin">{{ query['department'] }}</span>
+        </p>
+        <p>
+          <span>Date: </span>
+          <span class="thin"
+            >{{ query['posted_date'] }} {{ query['posted_time'] }}</span
+          >
+        </p>
+      </div>
+      <div class="split">
+        <p>
+          <span>Status: </span>
+          <span class="thin">{{ query['status'] }}</span>
+        </p>
+        <p>
+          <span>Ticket Number: </span>
+          <span class="thin">{{ query['ticket_number'] }}</span>
+        </p>
+      </div>
+      <div class="detail-problem">
+        <span>Challenge:</span>
+        <span class="thin">{{ query['problem_faced'] }}</span>
+      </div>
 
-                {% endif %}
+      {% if session.system_role == 'Administrator' and
+      query['status']=='Pending': %}
+      <div>
+        <form action="{{ url_for('assign_query') }}" , method="POST">
+          {{ form.hidden_tag() }}
+          <label for="assign">Assign to: </label>
+          {{ form.assign_to(class='loginputs') }} {{ form.id( id='disabled',
+          class='loginputs', value=query['_id']) }}
+          <button id="login_signin_btn">ASSIGN</button>
+        </form>
+      </div>
+      {% endif %} {% if session.system_role == 'General User'%}
+      <div>
+        <form action="{{ url_for('complete_task') }}" , method="POST">
+          {{ complete_task.hidden_tag() }}
+          <label for="assign">If task completed click below: </label>
+          {{ complete_task.comment(class='problem-faced' ) }} {{
+          complete_task.id( id='disabled', class='loginputs',
+          value=query['_id']) }}
+          <button id="login_signin_btn">Task Completed</button>
+        </form>
+      </div>
 
-                <a id="go-back" class="goBack" href="  {{ url_for('dashboard', username=session.name)  }} ">Go back</a>
-            </div>
-            
-        </div>    
-    </section>
+      {% endif %}
+    </div>
+  </div>
+</section>
 {% endblock %}
